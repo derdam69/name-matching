@@ -13,7 +13,7 @@ namespace ElasticsearchIntegrationTests
         {
 
             var settings = new ConnectionSettings(elasticsearchUri)
-                .DefaultIndex("wc")
+              
                 .DisableDirectStreaming()
                 ;
 
@@ -21,6 +21,7 @@ namespace ElasticsearchIntegrationTests
 
             if (deleteIndex) {
                 _client.Indices.Delete("wc");
+                _client.Indices.Delete("wc_le");
             }
            
         }
@@ -48,7 +49,7 @@ namespace ElasticsearchIntegrationTests
         public ISearchResponse<Doc> SearchTest(Doc doc)
         {
             var searchResponse = _client.Search<Doc>(s => s
-                 .Index("wc")
+                 .Index(Indices.All)
                  .Query(q => q
                      .Bool(b => b
                         .Must(m => m
@@ -92,5 +93,13 @@ namespace ElasticsearchIntegrationTests
             return searchResponse;
         }
 
+        public void IndexDocuments(IEnumerable<Doc> documents, string indexName)
+        {
+             var indexResponse = _client.IndexMany<Doc>(documents, indexName);
+            if (!indexResponse.IsValid)
+            {
+                throw new Exception($"Failed to index document: {indexResponse.DebugInformation}");
+            }
+        }
     }
 }
