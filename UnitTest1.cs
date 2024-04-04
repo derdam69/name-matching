@@ -276,6 +276,7 @@ public class UnitTest1
       [InlineData("7", "corenelia ritter", null, null, null, null)]
       [InlineData("3", "john and doe limited", null, null, null, null)]
       [InlineData("6", "heinz muller", null, null, null, null)]
+       [InlineData("LE1", "Jack Hormel Smith Foods Corp.", null, null, null, null)]
       public void NamesTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
@@ -294,8 +295,8 @@ public class UnitTest1
             Assert.NotNull(query.Hits.Single());
       }
 
-     [Theory]
-     [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
+      [Theory]
+      [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
       [InlineData("xx", "Jack Hormel", null, null, null, null)]
       public void Legal_Entity_Name_Should_Not_Match_Person_name_Test(string target, string names, string dob, string citizenships, string identification, string location)
@@ -304,6 +305,18 @@ public class UnitTest1
             // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
             Assert.DoesNotContain(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_NATURAL_PERSON));
             Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
+      }
+
+      [Theory]
+      [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
+      [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
+      [InlineData("xx", "Jack Hormel", null, null, null, null)]
+      public void Natural_Person_Name_Should_Not_Match_Legal_Entity_name_Test(string target, string names, string dob, string citizenships, string identification, string location)
+      {
+            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location, RecordType = Record.RECORD_TYPE_NATURAL_PERSON });
+            // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
+            Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_NATURAL_PERSON));
+            Assert.DoesNotContain(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
 
 }

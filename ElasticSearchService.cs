@@ -49,10 +49,16 @@ namespace ElasticsearchIntegrationTests
 
         public ISearchResponse<Record> SearchTest(Record doc)
         {
-            var indexName = "wc";
+            var indexName = Indices.All;
+
             if (doc.RecordType == Record.RECORD_TYPE_LEGAL_ENTITY) {
                 indexName = "wc_le";
             }
+
+             if (doc.RecordType == Record.RECORD_TYPE_NATURAL_PERSON) {
+                indexName = "wc";
+            }
+
             var searchResponse = _client.Search<Record>(s => s
                  .Index(indexName)
                  .Query(q => q
