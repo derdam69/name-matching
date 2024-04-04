@@ -55,7 +55,6 @@ namespace ElasticsearchIntegrationTests
                  .Index(indexName)
                  .Query(q => q
                      .Bool(b => b
-                        
                         .Must(m => m
                             .Bool(b => b
                                 .Should(
