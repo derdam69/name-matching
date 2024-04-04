@@ -80,21 +80,6 @@ namespace ElasticsearchIntegrationTests
         }
 
        
-
-        public ISearchResponse<Record> SearchTest_2(string query, string dob)
-        {
-            var searchResponse = _client.Search<Record>(s => s
-                 .Index("wc")
-                 .Query(q => (q
-                       .MatchPhrase(m => m.Field(f => f.Title).Query(query).Boost(2.1).Name("match phrase")) || q
-                       .Match(m => m.Field(f => f.Title).Query(query).Boost(2).Name("match exact").MinimumShouldMatch("4<90%")) || q
-                       .Match(m => m.Field(f => f.Title).Query(query).Fuzziness(Fuzziness.Auto).Name("match fuzzy").MinimumShouldMatch("4<90%"))
-                      )
-                 ).Highlight(h => h.Fields(f => f.Field("*")))
-             );
-            return searchResponse;
-        }
-
         public void IndexDocuments(IEnumerable<Record> documents, string indexName)
         {
              var indexResponse = _client.IndexMany<Record>(documents, indexName);
