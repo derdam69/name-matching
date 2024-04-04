@@ -27,7 +27,7 @@ public class UnitTest1
             ret.Add(new Doc() { Id = "10", Title = "Dos Santos Sanchez Jose" });
             ret.Add(new Doc() { Id = "11", Title = "Dos Santos Sanchez Rosa", Dob = "20210304", Citizenships = "PT,CH", Identifications = "PT12345678", Locations = "FR,SP" });
             ret.Add(new Doc() { Id = "12", Title = "Dos Santos Sanchez maria Rosa", Dob = "20210203", Citizenships = "CH,BR", Locations = "IT,SP" });
-                 ret.Add(new Doc() { Id = "13", Title = "Jack Hormell" });
+                 ret.Add(new Doc() { Id = "13", Title = "Jack Smith Hormel" });
      
             return ret;
       }
@@ -170,7 +170,7 @@ public class UnitTest1
             "Crown Holdings Inc.",
             "Weyerhaeuser Co.",
             "Parker-Hannifin Corp.",
-            "Hormel Foods Corp."
+            "Jack Hormel Smith Foods Corp."
             };
 
             List<Doc> ret = new List<Doc>();
@@ -289,9 +289,12 @@ public class UnitTest1
 
       [Theory]
       [InlineData("xx", "Hormel Foods Corp.", null, null, null, null)]
+      [InlineData("xx", "Jack Hormel Foods Corp.", null, null, null, null)]
+      [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
       public void Legal_Entity_NameTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Doc() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchTest(new Doc() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location },
+            "wc_le");
             Assert.NotNull(query.Hits.Single());
       }
 

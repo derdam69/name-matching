@@ -46,10 +46,10 @@ namespace ElasticsearchIntegrationTests
             return searchResponse;
         }
 
-        public ISearchResponse<Doc> SearchTest(Doc doc)
+        public ISearchResponse<Doc> SearchTest(Doc doc, string? indexName = "wc")
         {
             var searchResponse = _client.Search<Doc>(s => s
-                 .Index(Indices.All)
+                 .Index(indexName)
                  .Query(q => q
                      .Bool(b => b
                         .Must(m => m
