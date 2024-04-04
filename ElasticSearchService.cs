@@ -13,7 +13,6 @@ namespace ElasticsearchIntegrationTests
         public ElasticsearchService(Uri elasticsearchUri, bool deleteIndex)
         {
             var settings = new ConnectionSettings(elasticsearchUri)
-              
                 .DisableDirectStreaming();
 
             _client = new ElasticClient(settings);
@@ -22,7 +21,6 @@ namespace ElasticsearchIntegrationTests
                 _client.Indices.Delete("wc");
                 _client.Indices.Delete("wc_le");
             }
-           
         }
 
         public void IndexDocument<T>(T document) where T : class
