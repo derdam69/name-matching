@@ -12,11 +12,9 @@ namespace ElasticsearchIntegrationTests
 
         public ElasticsearchService(Uri elasticsearchUri, bool deleteIndex)
         {
-
             var settings = new ConnectionSettings(elasticsearchUri)
               
-                .DisableDirectStreaming()
-                ;
+                .DisableDirectStreaming();
 
             _client = new ElasticClient(settings);
 
@@ -84,7 +82,7 @@ namespace ElasticsearchIntegrationTests
                     )
                  ).Highlight(h => h.Fields(f => f.Field("*")))
              );
-             
+
             return searchResponse;
         }
 
