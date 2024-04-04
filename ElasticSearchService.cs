@@ -79,7 +79,6 @@ namespace ElasticsearchIntegrationTests
             return searchResponse;
         }
 
-       
         public void IndexDocuments(IEnumerable<Record> documents, string indexName)
         {
              var indexResponse = _client.IndexMany<Record>(documents, indexName);
