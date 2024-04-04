@@ -27,11 +27,12 @@ public class UnitTest1
             ret.Add(new Record() { Id = "10", Title = "Dos Santos Sanchez Jose" });
             ret.Add(new Record() { Id = "11", Title = "Dos Santos Sanchez Rosa", Dob = "20210304", Citizenships = "PT,CH", Identifications = "PT12345678", Locations = "FR,SP" });
             ret.Add(new Record() { Id = "12", Title = "Dos Santos Sanchez maria Rosa", Dob = "20210203", Citizenships = "CH,BR", Locations = "IT,SP" });
-                 ret.Add(new Record() { Id = "13", Title = "Jack Smith Hormel" });
+            ret.Add(new Record() { Id = "13", Title = "Jack Smith Hormel" });
      
-     ret.ForEach(r => {
-      r.RecordType = Record.RECORD_TYPE_NATURAL_PERSON;
-     });
+            ret.ForEach(r => {
+                  r.RecordType = Record.RECORD_TYPE_NATURAL_PERSON;
+            });
+
             return ret;
       }
 
@@ -185,8 +186,6 @@ public class UnitTest1
             return ret;
       }
 
-     
-
       static ElasticsearchService service;
 
       string file = @"c:\temp\test.json";
@@ -196,8 +195,6 @@ public class UnitTest1
       {
             lock (lockObj)
             {
-
-
                   if (service == null)
                   {
                         service = new ElasticsearchService(new Uri("http://localhost:9200"), true);
@@ -206,13 +203,10 @@ public class UnitTest1
 
                         Thread.Sleep(500);
                   }
-
             }
-
       }
 
       [Theory()]
-
       [InlineData("11", "Sanchez Rosa", null, null, null, "FR")]
       [InlineData("12", "Sanchez Rosa", null, null, null, "IT")]
       public void LocationsTest(string target, string names, string dob, string citizenships, string identification, string location)
