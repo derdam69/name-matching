@@ -79,13 +79,12 @@ namespace ElasticsearchIntegrationTests
                             bs => bs.Match(m => m.Field(f => f.Dob).Query(doc.Dob).Name("match dob").Boost(20)),
                             bs => bs.Match(m => m.Field(f => f.Citizenships).Query(doc.Citizenships).Operator(Operator.Or).Name("match citizenships").Boost(10)),
                             bs => bs.Match(m => m.Field(f => f.Locations).Query(doc.Locations).Operator(Operator.Or).Name("match location").Boost(9)),
-                            bs => bs.Match(m => m.Field(f => f.RelatedTo).Query(doc.RelatedTo).Fuzziness(Fuzziness.Auto).Name("match related").MinimumShouldMatch("3<90%"))
-
-                      
+                            bs => bs.Match(m => m.Field(f => f.RelatedTo).Query(doc.RelatedTo).Fuzziness(Fuzziness.Auto).Name("match related").MinimumShouldMatch("3<90%"))                     
                         )
                     )
                  ).Highlight(h => h.Fields(f => f.Field("*")))
              );
+             
             return searchResponse;
         }
 
