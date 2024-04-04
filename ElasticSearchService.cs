@@ -1,8 +1,4 @@
-using System;
 using Nest;
-using Elasticsearch.Net;
-using Newtonsoft.Json.Bson;
-using Xunit.Sdk;
 
 namespace ElasticsearchIntegrationTests
 {
