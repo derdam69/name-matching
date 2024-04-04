@@ -1,13 +1,3 @@
-using System.Numerics;
-using System.Linq;
-using System.Diagnostics.SymbolStore;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Text;
-using Elasticsearch.Net.Specification.SecurityApi;
-using Nest;
-using Newtonsoft.Json;
-
 namespace ElasticsearchIntegrationTests;
 
 public class UnitTest1
@@ -183,6 +173,7 @@ public class UnitTest1
             {
                   ret.Add(new Record() { Title = c, Id = $"LE{i}", RecordType=Record.RECORD_TYPE_LEGAL_ENTITY });
             }
+            
             return ret;
       }
 
