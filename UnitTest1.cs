@@ -12,27 +12,30 @@ namespace ElasticsearchIntegrationTests;
 
 public class UnitTest1
 {
-      IEnumerable<Doc> GetNaturalPersons()
+      IEnumerable<Record> GetNaturalPersons()
       {
-            var ret = new List<Doc>();
-            ret.Add(new Doc() { Id = "1", Title = "Ipsum Larem", Dob = "20010112" });
-            ret.Add(new Doc() { Id = "2", Title = "Larem Ipsum alias Lorem Ipsum" });
-            ret.Add(new Doc() { Id = "3", Title = "alpha John AND Doe beta LTD." });
-            ret.Add(new Doc() { Id = "4", Title = "Ipsum Lorem", Dob = "20020101" });
-            ret.Add(new Doc() { Id = "5", Title = "Ipsum John Lorem Doe" });
-            ret.Add(new Doc() { Id = "6", Title = "Heinz Muller", Identifications = "CHE12435687,RU2023230203", Citizenships = "CH,RU", RelatedTo = "Putin Vladmir,Kim Jong Uhn" });
-            ret.Add(new Doc() { Id = "7", Title = "Cornelia Liur Ritter Meyer", Identifications = "CHE12345678" });
-            ret.Add(new Doc() { Id = "8", Title = "Dos Santos Sanchez Maria" });
-            ret.Add(new Doc() { Id = "9", Title = "Dos Santos Sanchez Luis" });
-            ret.Add(new Doc() { Id = "10", Title = "Dos Santos Sanchez Jose" });
-            ret.Add(new Doc() { Id = "11", Title = "Dos Santos Sanchez Rosa", Dob = "20210304", Citizenships = "PT,CH", Identifications = "PT12345678", Locations = "FR,SP" });
-            ret.Add(new Doc() { Id = "12", Title = "Dos Santos Sanchez maria Rosa", Dob = "20210203", Citizenships = "CH,BR", Locations = "IT,SP" });
-                 ret.Add(new Doc() { Id = "13", Title = "Jack Smith Hormel" });
+            var ret = new List<Record>();
+            ret.Add(new Record() { Id = "1", Title = "Ipsum Larem", Dob = "20010112" });
+            ret.Add(new Record() { Id = "2", Title = "Larem Ipsum alias Lorem Ipsum" });
+            ret.Add(new Record() { Id = "3", Title = "alpha John AND Doe beta LTD." });
+            ret.Add(new Record() { Id = "4", Title = "Ipsum Lorem", Dob = "20020101" });
+            ret.Add(new Record() { Id = "5", Title = "Ipsum John Lorem Doe" });
+            ret.Add(new Record() { Id = "6", Title = "Heinz Muller", Identifications = "CHE12435687,RU2023230203", Citizenships = "CH,RU", RelatedTo = "Putin Vladmir,Kim Jong Uhn" });
+            ret.Add(new Record() { Id = "7", Title = "Cornelia Liur Ritter Meyer", Identifications = "CHE12345678" });
+            ret.Add(new Record() { Id = "8", Title = "Dos Santos Sanchez Maria" });
+            ret.Add(new Record() { Id = "9", Title = "Dos Santos Sanchez Luis" });
+            ret.Add(new Record() { Id = "10", Title = "Dos Santos Sanchez Jose" });
+            ret.Add(new Record() { Id = "11", Title = "Dos Santos Sanchez Rosa", Dob = "20210304", Citizenships = "PT,CH", Identifications = "PT12345678", Locations = "FR,SP" });
+            ret.Add(new Record() { Id = "12", Title = "Dos Santos Sanchez maria Rosa", Dob = "20210203", Citizenships = "CH,BR", Locations = "IT,SP" });
+                 ret.Add(new Record() { Id = "13", Title = "Jack Smith Hormel" });
      
+     ret.ForEach(r => {
+      r.RecordType = Record.RECORD_TYPE_NATURAL_PERSON;
+     });
             return ret;
       }
 
-      IEnumerable<Doc> GetLegalEntities()
+      IEnumerable<Record> GetLegalEntities()
       {
             string[] usCompanyNames = new string[]
             {
@@ -173,24 +176,16 @@ public class UnitTest1
             "Jack Hormel Smith Foods Corp."
             };
 
-            List<Doc> ret = new List<Doc>();
+            List<Record> ret = new List<Record>();
             int i = 1;
             foreach (var c in usCompanyNames)
             {
-                  ret.Add(new Doc() { Title = c, Id = $"LE{i}" });
+                  ret.Add(new Record() { Title = c, Id = $"LE{i}", RecordType=Record.RECORD_TYPE_LEGAL_ENTITY });
             }
             return ret;
       }
 
-      IEnumerable<Doc> GeLegalEntities()
-      {
-            var ret = new List<Doc>();
-            ret.Add(new Doc() { Id = "LE1", Title = "Big Corp Inc." });
-            ret.Add(new Doc() { Id = "LE2", Title = "Apple" });
-            ret.Add(new Doc() { Id = "LE3", Title = "Big Apple Inc." });
-            ret.Add(new Doc() { Id = "LE4", Title = "Star Business Ltd." });
-            return ret;
-      }
+     
 
       static ElasticsearchService service;
 
@@ -222,7 +217,7 @@ public class UnitTest1
       [InlineData("12", "Sanchez Rosa", null, null, null, "IT")]
       public void LocationsTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Doc() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -234,7 +229,7 @@ public class UnitTest1
       [InlineData("11", "Sanchez Rosa", null, "CH", null, null)]
       public void CitizenshipTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Doc() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -246,7 +241,7 @@ public class UnitTest1
       [InlineData("11", null, null, null, "PT12345678", null)]
       public void IdentificationTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Doc() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -258,7 +253,7 @@ public class UnitTest1
       [InlineData("12", "rosa sanchez", "20210203", null, null, null)]
       public void DobTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Doc() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -271,7 +266,7 @@ public class UnitTest1
       [InlineData("6", "heimz mueller", null, null, null, null)]
       public void NamesFuzzyTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Doc() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -283,7 +278,7 @@ public class UnitTest1
       [InlineData("6", "heinz muller", null, null, null, null)]
       public void NamesTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Doc() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -291,19 +286,31 @@ public class UnitTest1
       [InlineData("xx", "Hormel Foods Corp.", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Foods Corp.", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
+    
       public void Legal_Entity_NameTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Doc() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location },
-            "wc_le");
+            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location, RecordType = Record.RECORD_TYPE_LEGAL_ENTITY}
+            );
             Assert.NotNull(query.Hits.Single());
       }
 
+     [Theory]
+     [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
+      public void Legal_Entity_Name_Should_Not_Match_Person_name_Test(string target, string names, string dob, string citizenships, string identification, string location)
+      {
+            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location, RecordType = Record.RECORD_TYPE_LEGAL_ENTITY });
+            // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
+            Assert.DoesNotContain(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_NATURAL_PERSON));
+            Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
+      }
 
 }
 
-public class Doc
+public class Record
 {
       public string Id { get; set; }
+
+      public string RecordType { get; set;}
 
       public string Title { get; set; }
 
@@ -316,4 +323,8 @@ public class Doc
       public string Identifications { get; set; }
 
       public string RelatedTo { get; set; }
+
+      public static string RECORD_TYPE_LEGAL_ENTITY = "E";
+
+      public static string RECORD_TYPE_NATURAL_PERSON = "I";
 }

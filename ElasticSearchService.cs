@@ -2,6 +2,7 @@ using System;
 using Nest;
 using Elasticsearch.Net;
 using Newtonsoft.Json.Bson;
+using Xunit.Sdk;
 
 namespace ElasticsearchIntegrationTests
 {
@@ -46,20 +47,25 @@ namespace ElasticsearchIntegrationTests
             return searchResponse;
         }
 
-        public ISearchResponse<Doc> SearchTest(Doc doc, string? indexName = "wc")
+        public ISearchResponse<Record> SearchTest(Record doc)
         {
-            var searchResponse = _client.Search<Doc>(s => s
+            var indexName = "wc";
+            if (doc.RecordType == Record.RECORD_TYPE_LEGAL_ENTITY) {
+                indexName = "wc_le";
+            }
+            var searchResponse = _client.Search<Record>(s => s
                  .Index(indexName)
                  .Query(q => q
                      .Bool(b => b
+                        
                         .Must(m => m
                             .Bool(b => b
                                 .Should(
                                     bs => bs.MatchPhrase(m => m.Field(f => f.Title).Query(doc.Title).Boost(2.1).Name("match phrase")),
                                     bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Boost(2).Name("match exact").MinimumShouldMatch("3<90%")),
                                     bs => bs.Match(m => m.Field(f => f.Identifications).Query(doc.Identifications).Boost(2).Name("match identification")),
-                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy").MinimumShouldMatch("3<90%"))
-                                  
+                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy").MinimumShouldMatch("3<90%")),
+                                    bs => bs.Match(m => m.Field(f => f.RecordType).Query(doc.RecordType))
                                 )
                            )
                         )
@@ -79,9 +85,9 @@ namespace ElasticsearchIntegrationTests
 
        
 
-        public ISearchResponse<Doc> SearchTest_2(string query, string dob)
+        public ISearchResponse<Record> SearchTest_2(string query, string dob)
         {
-            var searchResponse = _client.Search<Doc>(s => s
+            var searchResponse = _client.Search<Record>(s => s
                  .Index("wc")
                  .Query(q => (q
                        .MatchPhrase(m => m.Field(f => f.Title).Query(query).Boost(2.1).Name("match phrase")) || q
@@ -93,9 +99,9 @@ namespace ElasticsearchIntegrationTests
             return searchResponse;
         }
 
-        public void IndexDocuments(IEnumerable<Doc> documents, string indexName)
+        public void IndexDocuments(IEnumerable<Record> documents, string indexName)
         {
-             var indexResponse = _client.IndexMany<Doc>(documents, indexName);
+             var indexResponse = _client.IndexMany<Record>(documents, indexName);
             if (!indexResponse.IsValid)
             {
                 throw new Exception($"Failed to index document: {indexResponse.DebugInformation}");
