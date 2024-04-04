@@ -218,7 +218,6 @@ public class UnitTest1
             Assert.Equal(target, query.Hits.First().Id);
       }
 
-
       [Theory()]
       [InlineData("6", null, null, null, "CHE12435687", null)]
       [InlineData("6", null, null, null, "RU2023230203", null)]
@@ -230,7 +229,6 @@ public class UnitTest1
             Assert.Equal(target, query.Hits.First().Id);
       }
 
-
       [Theory()]
       [InlineData("1", "Ipsum Larem", "20010112", null, null, null)]
       [InlineData("4", "Ipsum Lorem", "20020101", null, null, null)]
@@ -241,7 +239,6 @@ public class UnitTest1
             var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
-
 
       [Theory()]
       [InlineData("11", "sanchoz resa", null, null, null, null)]
@@ -303,7 +300,6 @@ public class UnitTest1
             Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_NATURAL_PERSON));
             Assert.DoesNotContain(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
-
 }
 
 public class Record
