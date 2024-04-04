@@ -286,7 +286,7 @@ public class UnitTest1
       [InlineData("xx", "Hormel Foods Corp.", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Foods Corp.", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
-    
+      [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
       public void Legal_Entity_NameTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location, RecordType = Record.RECORD_TYPE_LEGAL_ENTITY}
@@ -296,6 +296,8 @@ public class UnitTest1
 
      [Theory]
      [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
+      [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
+      [InlineData("xx", "Jack Hormel", null, null, null, null)]
       public void Legal_Entity_Name_Should_Not_Match_Person_name_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location, RecordType = Record.RECORD_TYPE_LEGAL_ENTITY });
