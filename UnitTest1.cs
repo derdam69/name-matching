@@ -192,7 +192,7 @@ public class UnitTest1
                         service.IndexDocuments(GetNaturalPersons(), "wc");
                         service.IndexDocuments(GetLegalEntities(), "wc_le");
 
-                        Thread.Sleep(500);
+                        Thread.Sleep(1000);
                   }
             }
       }
