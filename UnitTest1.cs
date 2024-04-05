@@ -189,8 +189,8 @@ public class UnitTest1
                   if (service == null)
                   {
                         service = new ElasticsearchService(new Uri("http://localhost:9200"), true);
-                        service.IndexDocuments(GetNaturalPersons(), "wc");
-                        service.IndexDocuments(GetLegalEntities(), "wc_le");
+                        service.IndexDocuments(GetNaturalPersons(), ElasticsearchService.INDEX_NATURAL_PERSON);
+                        service.IndexDocuments(GetLegalEntities(), ElasticsearchService.INDEX_LEGAL_ENTITY);
 
                         Thread.Sleep(1000);
                   }

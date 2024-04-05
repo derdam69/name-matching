@@ -6,6 +6,9 @@ namespace ElasticsearchIntegrationTests
     {
         private readonly ElasticClient _client;
 
+        public static string INDEX_NATURAL_PERSON = "wc_np";
+        public static string INDEX_LEGAL_ENTITY = "wc_le";
+
         public ElasticsearchService(Uri elasticsearchUri, bool deleteIndex)
         {
             var settings = new ConnectionSettings(elasticsearchUri)
@@ -14,8 +17,8 @@ namespace ElasticsearchIntegrationTests
             _client = new ElasticClient(settings);
 
             if (deleteIndex) {
-                _client.Indices.Delete("wc");
-                _client.Indices.Delete("wc_le");
+                _client.Indices.Delete(INDEX_NATURAL_PERSON);
+                _client.Indices.Delete(INDEX_NATURAL_PERSON);
             }
         }
 
@@ -44,11 +47,11 @@ namespace ElasticsearchIntegrationTests
             var indexName = Indices.All;
 
             if (doc.RecordType == Record.RECORD_TYPE_LEGAL_ENTITY) {
-                indexName = "wc_le";
+                indexName = INDEX_LEGAL_ENTITY;
             }
 
              if (doc.RecordType == Record.RECORD_TYPE_NATURAL_PERSON) {
-                indexName = "wc";
+                indexName = INDEX_NATURAL_PERSON;
             }
 
             var searchResponse = _client.Search<Record>(s => s
