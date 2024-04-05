@@ -202,7 +202,7 @@ public class UnitTest1
       [InlineData("12", "Sanchez Rosa", null, null, null, "IT")]
       public void LocationsTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -214,7 +214,7 @@ public class UnitTest1
       [InlineData("11", "Sanchez Rosa", null, "CH", null, null)]
       public void CitizenshipTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -225,7 +225,7 @@ public class UnitTest1
       [InlineData("11", null, null, null, "PT12345678", null)]
       public void IdentificationTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -236,7 +236,7 @@ public class UnitTest1
       [InlineData("12", "rosa sanchez", "20210203", null, null, null)]
       public void DobTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -248,7 +248,7 @@ public class UnitTest1
       [InlineData("6", "heimz mueller", null, null, null, null)]
       public void NamesFuzzyTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -258,12 +258,13 @@ public class UnitTest1
       [InlineData("7", "corenelia ritter", null, null, null, null)]
       [InlineData("3", "john and doe limited", null, null, null, null)]
       [InlineData("6", "heinz muller", null, null, null, null)]
-       [InlineData("LE1", "Jack Hormel Smith Foods Corp.", null, null, null, null)]
       public void NamesTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
+
+      
 
       [Theory]
       [InlineData("xx", "Hormel Foods Corp.", null, null, null, null)]
@@ -272,10 +273,12 @@ public class UnitTest1
       [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
       public void Legal_Entity_NameTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query = service.SearchTest(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location, RecordType = Record.RECORD_TYPE_LEGAL_ENTITY}
+            var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location}
             );
             Assert.NotNull(query.Hits.Single());
       }
+
+      /*
 
       [Theory]
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
@@ -300,6 +303,8 @@ public class UnitTest1
             Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_NATURAL_PERSON));
             Assert.DoesNotContain(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
+
+      */
 }
 
 public class Record

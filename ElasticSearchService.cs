@@ -42,18 +42,10 @@ namespace ElasticsearchIntegrationTests
             return searchResponse;
         }
 
-        public ISearchResponse<Record> SearchTest(Record doc)
+        public ISearchResponse<Record> SearchNaturalPerson(Record doc)
         {
-            var indexName = Indices.All;
-
-            if (doc.RecordType == Record.RECORD_TYPE_LEGAL_ENTITY) {
-                indexName = INDEX_LEGAL_ENTITY;
-            }
-
-             if (doc.RecordType == Record.RECORD_TYPE_NATURAL_PERSON) {
-                indexName = INDEX_NATURAL_PERSON;
-            }
-
+            var indexName = INDEX_NATURAL_PERSON;
+           
             var searchResponse = _client.Search<Record>(s => s
                  .Index(indexName)
                  .Query(q => q
@@ -82,6 +74,42 @@ namespace ElasticsearchIntegrationTests
             return searchResponse;
         }
 
+         public ISearchResponse<Record> SearchLegalEntity(Record doc)
+        {
+            var indexName = INDEX_LEGAL_ENTITY;
+
+          
+            var searchResponse = _client.Search<Record>(s => s
+                 .Index(indexName)
+                 .Query(q => q
+                     .Bool(b => b
+                        .Must(m => m
+                            .Bool(b => b
+                                .Should(
+                                    bs => bs.MatchPhrase(m => m.Field(f => f.Title).Query(doc.Title).Boost(2.1).Name("match phrase")),
+                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Boost(2).Name("match exact").MinimumShouldMatch("3<90%")),
+                                    bs => bs.Match(m => m.Field(f => f.Identifications).Query(doc.Identifications).Boost(2).Name("match identification")),
+                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy").MinimumShouldMatch("3<90%")),
+                                    bs => bs.Match(m => m.Field(f => f.RecordType).Query(doc.RecordType))
+                                )
+                           )
+                        )
+                        .Should(
+                            bs => bs.Match(m => m.Field(f => f.Dob).Query(doc.Dob).Name("match dob").Boost(20)),
+                            bs => bs.Match(m => m.Field(f => f.Citizenships).Query(doc.Citizenships).Operator(Operator.Or).Name("match citizenships").Boost(10)),
+                            bs => bs.Match(m => m.Field(f => f.Locations).Query(doc.Locations).Operator(Operator.Or).Name("match location").Boost(9)),
+                            bs => bs.Match(m => m.Field(f => f.RelatedTo).Query(doc.RelatedTo).Fuzziness(Fuzziness.Auto).Name("match related").MinimumShouldMatch("3<90%"))                     
+                        )
+                    )
+                 ).Highlight(h => h.Fields(f => f.Field("*")))
+             );
+
+            return searchResponse;
+        }
+
+
+
+
         public void IndexDocuments(IEnumerable<Record> documents, string indexName)
         {
              var indexResponse = _client.IndexMany<Record>(documents, indexName);
@@ -90,5 +118,6 @@ namespace ElasticsearchIntegrationTests
                 throw new Exception($"Failed to index document: {indexResponse.DebugInformation}");
             }
         }
+
     }
 }
