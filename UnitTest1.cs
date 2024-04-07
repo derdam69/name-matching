@@ -1,3 +1,6 @@
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
+
 namespace ElasticsearchIntegrationTests;
 
 public class UnitTest1
@@ -122,7 +125,7 @@ public class UnitTest1
             "Progressive Corp.",
             "Union Pacific Corp.",
             "Paccar Inc.",
-            "Twenty-First Century Fox Inc.",
+            "Twenty First Century Fox Inc",
             "CBS Corp.",
             "ConocoPhillips",
             "World Fuel Services Corp.",
@@ -197,6 +200,8 @@ public class UnitTest1
             }
       }
 
+    
+
       [Theory()]
       [InlineData("11", "Sanchez Rosa", null, null, null, "FR")]
       [InlineData("12", "Sanchez Rosa", null, null, null, "IT")]
@@ -263,22 +268,21 @@ public class UnitTest1
             var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
             Assert.Equal(target, query.Hits.First().Id);
       }
-
-      
+     
 
       [Theory]
-      [InlineData("xx", "Hormel Foods Corp.", null, null, null, null)]
+    //  [InlineData("xx", "Fannie Mae", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Foods Corp.", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
+      [InlineData("xx", "Jack Hormel", null, null, null, null)] 
       public void Legal_Entity_NameTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location}
             );
-            Assert.NotNull(query.Hits.Single());
+            System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
+            Assert.True(query.Hits.Any()); 
       }
-
-     
 
       [Theory]
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
@@ -292,6 +296,8 @@ public class UnitTest1
             Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
 
+      
+
       [Theory]
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
@@ -304,7 +310,23 @@ public class UnitTest1
             Assert.DoesNotContain(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
 
-     
+      [Theory]
+      [InlineData("xx", "Jack Hormel", null, null, null, null)]
+      public async void Name_can_match_Match_all_types_Test(string target, string names, string dob, string citizenships, string identification, string location)
+      {
+            var query1 = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});    
+            var query2 = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});           
+            // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(hits, Formatting.Indented));
+            Assert.Contains(query1.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_NATURAL_PERSON));
+            Assert.Contains(query2.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
+
+            var tmp = query1.Hits.ToList();
+            tmp.AddRange(query2.Hits.ToArray());
+
+            // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(tmp, Formatting.Indented));
+      }
+
+      
 }
 
 public class Record

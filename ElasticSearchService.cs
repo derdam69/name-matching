@@ -18,7 +18,7 @@ namespace ElasticsearchIntegrationTests
 
             if (deleteIndex) {
                 _client.Indices.Delete(INDEX_NATURAL_PERSON);
-                _client.Indices.Delete(INDEX_NATURAL_PERSON);
+                _client.Indices.Delete(INDEX_LEGAL_ENTITY);
             }
         }
 
@@ -56,8 +56,8 @@ namespace ElasticsearchIntegrationTests
                                     bs => bs.MatchPhrase(m => m.Field(f => f.Title).Query(doc.Title).Boost(2.1).Name("match phrase")),
                                     bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Boost(2).Name("match exact").MinimumShouldMatch("3<90%")),
                                     bs => bs.Match(m => m.Field(f => f.Identifications).Query(doc.Identifications).Boost(2).Name("match identification")),
-                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy").MinimumShouldMatch("3<90%")),
-                                    bs => bs.Match(m => m.Field(f => f.RecordType).Query(doc.RecordType))
+                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy").MinimumShouldMatch("3<90%"))
+                                   // bs => bs.Match(m => m.Field(f => f.RecordType).Query(doc.RecordType))
                                 )
                            )
                         )
@@ -87,10 +87,11 @@ namespace ElasticsearchIntegrationTests
                             .Bool(b => b
                                 .Should(
                                     bs => bs.MatchPhrase(m => m.Field(f => f.Title).Query(doc.Title).Boost(2.1).Name("match phrase")),
-                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Boost(2).Name("match exact").MinimumShouldMatch("3<90%")),
+                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Boost(2).Name("match exact")),
                                     bs => bs.Match(m => m.Field(f => f.Identifications).Query(doc.Identifications).Boost(2).Name("match identification")),
-                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy").MinimumShouldMatch("3<90%")),
-                                    bs => bs.Match(m => m.Field(f => f.RecordType).Query(doc.RecordType))
+
+                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy"))
+                                  //  bs => bs.Match(m => m.Field(f => f.RecordType).Query(doc.RecordType))
                                 )
                            )
                         )
@@ -115,5 +116,6 @@ namespace ElasticsearchIntegrationTests
             }
         }
 
+       
     }
 }
