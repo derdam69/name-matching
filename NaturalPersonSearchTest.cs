@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ElasticsearchIntegrationTests;
 
-public class UnitTest1
+public class NaturalPersonSearchTest
 {
       IEnumerable<Record> GetNaturalPersons()
       {
@@ -185,7 +185,7 @@ public class UnitTest1
       string file = @"c:\temp\test.json";
 
       static object lockObj = new object();
-      public UnitTest1()
+      public NaturalPersonSearchTest()
       {
             lock (lockObj)
             {
