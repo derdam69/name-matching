@@ -1,5 +1,6 @@
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using System.Security.AccessControl;
 using Newtonsoft.Json;
 
 namespace ElasticsearchIntegrationTests;
@@ -345,6 +346,7 @@ public class SearchTest
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
            // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
             Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
+          
       }
       
 }
