@@ -322,6 +322,7 @@ public class SearchTest
       [InlineData("xx", "IBM America", null, null, null, null)]
       [InlineData("xx", "Fanny Mae America limited company", null, null, null, null)]
       [InlineData("xx", "Amexco", null, null, null, null)]
+      [InlineData("xx", "Amexco America limited company", null, null, null, null)]
       [InlineData("xx", "American Express", null, null, null, null)]
       [InlineData("xx", "American Express America limited company", null, null, null, null)]
       public void Legal_Entity_Common_Terms_Test(string target, string names, string dob, string citizenships, string identification, string location)
