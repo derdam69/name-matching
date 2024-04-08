@@ -187,13 +187,6 @@ public class SearchTest
             return ret;
       }
 
-      static string GetRandomString(string[] array)
-    {
-        Random random = new Random();
-        int randomIndex = random.Next(array.Length);
-        return array[randomIndex];
-    }
-
       static ElasticsearchService service;
 
       string file = @"c:\temp\test.json";
