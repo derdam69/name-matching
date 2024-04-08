@@ -173,6 +173,7 @@ public class SearchTest
             "Parker-Hannifin Corp.",
             "Jack Hormel Smith Foods Corp.",
             "Amexco",
+            "Goldmann Powell Industries"
             };
 
 
@@ -332,8 +333,13 @@ public class SearchTest
       }
 
       [Theory]
-      [InlineData("xx", "American Express America limited company", null, null, null, null)]
-      public void Legal_Enitiy_Common_Terms_Test_LowFreq(string target, string names, string dob, string citizenships, string identification, string location)
+      [InlineData("xx", "Goldmann Powell", null, null, null, null)]
+      [InlineData("xx", "Goldman Powell", null, null, null, null)]
+      [InlineData("xx", "Goldmann Powel", null, null, null, null)]
+      [InlineData("xx", "Goldman Powel", null, null, null, null)]
+      [InlineData("xx", "Gildman Powell", null, null, null, null)]
+      [InlineData("xx", "Goldmann Piwell", null, null, null, null)]
+      public void Legal_Enitiy_Common_Terms_Test_Fuzzy(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
             System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
