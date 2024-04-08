@@ -101,10 +101,11 @@ namespace ElasticsearchIntegrationTests
                         .Must(m => m
                             .Bool(b => b
                                 .Should(
-                                    bs => bs.MatchPhrase(m => m.Field(f => f.Title).Query(doc.Title).Boost(2.1).Name("match phrase")),
-                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Boost(2).Name("match exact")),
-                                    bs => bs.Match(m => m.Field(f => f.Identifications).Query(doc.Identifications).Boost(2).Name("match identification")),
-                                    bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy"))
+                                    bs => bs.CommonTerms(m => m.Field(f => f.Title).Query(doc.Title).CutoffFrequency(0.001).Name("common terms"))
+                                  //  bs => bs.MatchPhrase(m => m.Field(f => f.Title).Query(doc.Title).Boost(2.1).Name("match phrase")),
+                                  //  bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Boost(2).Name("match exact")),
+                                  //  bs => bs.Match(m => m.Field(f => f.Identifications).Query(doc.Identifications).Boost(2).Name("match identification")),
+                                  //  bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy"))
                                    // bs => bs.Match(m => m.Field(f => f.RecordType).Query(doc.RecordType))
                                 )
                            )

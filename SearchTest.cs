@@ -178,7 +178,7 @@ public class SearchTest
             int i = 1;
             foreach (var c in usCompanyNames)
             {
-                  ret.Add(new Record() { Title = c, Id = $"LE{i}", RecordType=Record.RECORD_TYPE_LEGAL_ENTITY });
+                  ret.Add(new Record() { Title = $"{c} America Limited Company", Id = $"LE{i}", RecordType=Record.RECORD_TYPE_LEGAL_ENTITY });
                   i++;
             }
             
@@ -304,7 +304,6 @@ public class SearchTest
       }
 
       
-
       [Theory]
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
@@ -318,26 +317,14 @@ public class SearchTest
             Assert.DoesNotContain(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
 
-      /*
-
       [Theory]
-      [InlineData("xx", "Jack Hormel", null, null, null, null)]
-      public async void Name_can_match_Match_all_types_Test(string target, string names, string dob, string citizenships, string identification, string location)
+      [InlineData("xx", "IBM America", null, null, null, null)]
+      public void Legal_Enitiy_Common_Terms_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
-            var query1 = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});    
-            var query2 = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});           
-            // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(hits, Formatting.Indented));
-            Assert.Contains(query1.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_NATURAL_PERSON));
-            Assert.Contains(query2.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
-
-            var tmp = query1.Hits.ToList();
-            tmp.AddRange(query2.Hits.ToArray());
-
-            // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(tmp, Formatting.Indented));
+            var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
+            // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
+            Assert.Single(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
-
-      */
-
       
 }
 
