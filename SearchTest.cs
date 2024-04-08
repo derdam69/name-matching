@@ -319,6 +319,7 @@ public class SearchTest
 
       [Theory]
       [InlineData("xx", "IBM America", null, null, null, null)]
+      [InlineData("xx", "Fanny Mae America limited company", null, null, null, null)]
       public void Legal_Enitiy_Common_Terms_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
