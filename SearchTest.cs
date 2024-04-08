@@ -344,11 +344,10 @@ public class SearchTest
       public void Legal_Entity_Fuzzy_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
-            System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
+           // System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
             Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
           
       }
-      
 }
 
 public class Record
