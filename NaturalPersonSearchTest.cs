@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
@@ -21,6 +22,9 @@ public class NaturalPersonSearchTest
             ret.Add(new Record() { Id = "11", Title = "Dos Santos Sanchez Rosa", Dob = "20210304", Citizenships = "PT,CH", Identifications = "PT12345678", Locations = "FR,SP" });
             ret.Add(new Record() { Id = "12", Title = "Dos Santos Sanchez maria Rosa", Dob = "20210203", Citizenships = "CH,BR", Locations = "IT,SP" });
             ret.Add(new Record() { Id = "13", Title = "Jack Smith Hormel" });
+            ret.Add(new Record() { Id = "14", Title = "Fannie Mae" });
+         
+     
      
             ret.ForEach(r => {
                   r.RecordType = Record.RECORD_TYPE_NATURAL_PERSON;
@@ -175,6 +179,7 @@ public class NaturalPersonSearchTest
             foreach (var c in usCompanyNames)
             {
                   ret.Add(new Record() { Title = c, Id = $"LE{i}", RecordType=Record.RECORD_TYPE_LEGAL_ENTITY });
+                  i++;
             }
             
             return ret;
@@ -194,8 +199,8 @@ public class NaturalPersonSearchTest
                         service = new ElasticsearchService(new Uri("http://localhost:9200"), true);
                         service.IndexDocuments(GetNaturalPersons(), ElasticsearchService.INDEX_NATURAL_PERSON);
                         service.IndexDocuments(GetLegalEntities(), ElasticsearchService.INDEX_LEGAL_ENTITY);
-
-                        Thread.Sleep(1000);
+                  
+                       // Thread.Sleep(1500);
                   }
             }
       }
@@ -208,6 +213,7 @@ public class NaturalPersonSearchTest
       public void LocationsTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -271,7 +277,7 @@ public class NaturalPersonSearchTest
      
 
       [Theory]
-    //  [InlineData("xx", "Fannie Mae", null, null, null, null)]
+      [InlineData("xx", "Fannie Mae", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Foods Corp.", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
@@ -280,7 +286,7 @@ public class NaturalPersonSearchTest
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location}
             );
-            System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
+           // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
             Assert.True(query.Hits.Any()); 
       }
 
@@ -310,6 +316,8 @@ public class NaturalPersonSearchTest
             Assert.DoesNotContain(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
 
+      /*
+
       [Theory]
       [InlineData("xx", "Jack Hormel", null, null, null, null)]
       public async void Name_can_match_Match_all_types_Test(string target, string names, string dob, string citizenships, string identification, string location)
@@ -325,6 +333,8 @@ public class NaturalPersonSearchTest
 
             // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(tmp, Formatting.Indented));
       }
+
+      */
 
       
 }

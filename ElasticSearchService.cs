@@ -22,15 +22,6 @@ namespace ElasticsearchIntegrationTests
             }
         }
 
-        public void IndexDocument<T>(T document) where T : class
-        {
-            var indexResponse = _client.IndexDocument<T>(document);
-            if (!indexResponse.IsValid)
-            {
-                throw new Exception($"Failed to index document: {indexResponse.DebugInformation}");
-            }
-        }
-
         public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector) where T : class
         {
             var searchResponse = _client.Search(searchSelector);
@@ -53,6 +44,7 @@ namespace ElasticsearchIntegrationTests
                         .Must(m => m
                             .Bool(b => b
                                 .Should(
+                                  
                                     bs => bs.MatchPhrase(m => m.Field(f => f.Title).Query(doc.Title).Boost(2.1).Name("match phrase")),
                                     bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Boost(2).Name("match exact").MinimumShouldMatch("3<90%")),
                                     bs => bs.Match(m => m.Field(f => f.Identifications).Query(doc.Identifications).Boost(2).Name("match identification")),
@@ -63,10 +55,33 @@ namespace ElasticsearchIntegrationTests
                         )
                         .Should(
                             bs => bs.Match(m => m.Field(f => f.Dob).Query(doc.Dob).Name("match dob").Boost(20)),
-                            bs => bs.Match(m => m.Field(f => f.Citizenships).Query(doc.Citizenships).Operator(Operator.Or).Name("match citizenships").Boost(10)),
-                            bs => bs.Match(m => m.Field(f => f.Locations).Query(doc.Locations).Operator(Operator.Or).Name("match location").Boost(9)),
+                            bs => bs.Match(m => m.Field(f => f.Citizenships).Query(doc.Citizenships).Operator(Operator.Or).Name("match citizenships").Boost(12)),
+                            bs => bs.Match(m => m.Field(f => f.Locations).Query(doc.Locations).Operator(Operator.Or).Name("match location").Boost(10)),
                             bs => bs.Match(m => m.Field(f => f.RelatedTo).Query(doc.RelatedTo).Fuzziness(Fuzziness.Auto).Name("match related").MinimumShouldMatch("3<90%"))                     
                         )
+                    )
+                 ).Highlight(h => h.Fields(f => f.Field("*")))
+             );
+
+            return searchResponse;
+        }
+
+
+        public ISearchResponse<Record> AllLegalEntities(string indexName)
+        {
+              var searchResponse = _client.Search<Record>(s => s
+                 .Index(indexName)
+                 .Query(q => q
+                     .Bool(b => b
+                        .Must(m => m
+                            .Bool(b => b
+                                .Should(
+                                       bs => bs.MatchAll()
+                                  
+                                )
+                           )
+                        )
+                        
                     )
                  ).Highlight(h => h.Fields(f => f.Field("*")))
              );
@@ -89,9 +104,8 @@ namespace ElasticsearchIntegrationTests
                                     bs => bs.MatchPhrase(m => m.Field(f => f.Title).Query(doc.Title).Boost(2.1).Name("match phrase")),
                                     bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Boost(2).Name("match exact")),
                                     bs => bs.Match(m => m.Field(f => f.Identifications).Query(doc.Identifications).Boost(2).Name("match identification")),
-
                                     bs => bs.Match(m => m.Field(f => f.Title).Query(doc.Title).Fuzziness(Fuzziness.Auto).Name("match fuzzy"))
-                                  //  bs => bs.Match(m => m.Field(f => f.RecordType).Query(doc.RecordType))
+                                   // bs => bs.Match(m => m.Field(f => f.RecordType).Query(doc.RecordType))
                                 )
                            )
                         )
@@ -114,6 +128,7 @@ namespace ElasticsearchIntegrationTests
             {
                 throw new Exception($"Failed to index document: {indexResponse.DebugInformation}");
             }
+             _client.Indices.Refresh(indexName);
         }
 
        
