@@ -23,9 +23,7 @@ public class SearchTest
             ret.Add(new Record() { Id = "12", Title = "Dos Santos Sanchez maria Rosa", Dob = "20210203", Citizenships = "CH,BR", Locations = "IT,SP" });
             ret.Add(new Record() { Id = "13", Title = "Jack Smith Hormel" });
             ret.Add(new Record() { Id = "14", Title = "Fannie Mae" });
-         
-     
-     
+      
             ret.ForEach(r => {
                   r.RecordType = Record.RECORD_TYPE_NATURAL_PERSON;
             });
@@ -326,7 +324,7 @@ public class SearchTest
       [InlineData("xx", "Amexco", null, null, null, null)]
       [InlineData("xx", "American Express", null, null, null, null)]
       [InlineData("xx", "American Express America limited company", null, null, null, null)]
-      public void Legal_Enitiy_Common_Terms_Test(string target, string names, string dob, string citizenships, string identification, string location)
+      public void Legal_Entity_Common_Terms_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
             // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
@@ -340,7 +338,7 @@ public class SearchTest
       [InlineData("xx", "Goldman Powel", null, null, null, null)]
       [InlineData("xx", "Gildman Powell", null, null, null, null)]
       [InlineData("xx", "Goldmann Piwell", null, null, null, null)]
-      public void Legal_Enitiy_Common_Terms_Test_Fuzzy(string target, string names, string dob, string citizenships, string identification, string location)
+      public void Legal_Entity_Fuzzy_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
             System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
