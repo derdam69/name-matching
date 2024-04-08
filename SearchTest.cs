@@ -213,7 +213,7 @@ public class SearchTest
       public void LocationsTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
-            System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
+           // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
             Assert.Equal(target, query.Hits.First().Id);
       }
 
