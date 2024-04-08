@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace ElasticsearchIntegrationTests;
 
-public class NaturalPersonSearchTest
+public class SearchTest
 {
       IEnumerable<Record> GetNaturalPersons()
       {
@@ -190,7 +190,7 @@ public class NaturalPersonSearchTest
       string file = @"c:\temp\test.json";
 
       static object lockObj = new object();
-      public NaturalPersonSearchTest()
+      public SearchTest()
       {
             lock (lockObj)
             {
@@ -294,6 +294,7 @@ public class NaturalPersonSearchTest
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
       [InlineData("xx", "Jack Hormel", null, null, null, null)]
+      [InlineData("xx", "Fannie Mae", null, null, null, null)]
       public void Legal_Entity_Name_Should_Not_Match_Person_name_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
@@ -308,6 +309,7 @@ public class NaturalPersonSearchTest
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Smith", null, null, null, null)]
       [InlineData("xx", "Jack Hormel", null, null, null, null)]
+      [InlineData("xx", "Fannie Mae", null, null, null, null)]
       public void Natural_Person_Name_Should_Not_Match_Legal_Entity_name_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
