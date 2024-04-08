@@ -334,16 +334,16 @@ public class SearchTest
       }
 
       [Theory]
-      [InlineData("xx", "Goldmann Powell", null, null, null, null)]
-      [InlineData("xx", "Goldman Powell", null, null, null, null)]
-      [InlineData("xx", "Goldmann Powel", null, null, null, null)]
-      [InlineData("xx", "Goldman Powel", null, null, null, null)]
-      [InlineData("xx", "Gildman Powell", null, null, null, null)]
-      [InlineData("xx", "Goldmann Piwell", null, null, null, null)]
+      [InlineData("xx", "Goldmann Powell company", null, null, null, null)]
+      [InlineData("xx", "Goldman Powell company", null, null, null, null)]
+      [InlineData("xx", "Goldmann Powel company", null, null, null, null)]
+      [InlineData("xx", "Goldman Powel company", null, null, null, null)]
+      [InlineData("xx", "Gildman Powell company", null, null, null, null)]
+      [InlineData("xx", "Goldmann Piwell company", null, null, null, null)]
       public void Legal_Entity_Fuzzy_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location});
-            System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
+           // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
             Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
       
