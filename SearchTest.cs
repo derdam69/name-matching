@@ -175,6 +175,7 @@ public class SearchTest
             "Amexco"
             };
 
+
             List<Record> ret = new List<Record>();
             int i = 1;
             foreach (var c in usCompanyNames)
@@ -185,6 +186,13 @@ public class SearchTest
             
             return ret;
       }
+
+      static string GetRandomString(string[] array)
+    {
+        Random random = new Random();
+        int randomIndex = random.Next(array.Length);
+        return array[randomIndex];
+    }
 
       static ElasticsearchService service;
 
