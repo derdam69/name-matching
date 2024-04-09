@@ -11,15 +11,17 @@ namespace ElasticsearchIntegrationTests
 
         public ElasticsearchService(Uri elasticsearchUri, bool deleteIndex)
         {
-            var settings = new ConnectionSettings(elasticsearchUri)
+            var connectionSettings = new ConnectionSettings(elasticsearchUri)
                 .DisableDirectStreaming();
 
-            _client = new ElasticClient(settings);
+            _client = new ElasticClient(connectionSettings);
 
             if (deleteIndex) {
                 _client.Indices.Delete(INDEX_NATURAL_PERSON);
                 _client.Indices.Delete(INDEX_LEGAL_ENTITY);
             }
+
+            
         }
 
         public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector) where T : class
@@ -134,4 +136,6 @@ namespace ElasticsearchIntegrationTests
 
        
     }
+
+    
 }

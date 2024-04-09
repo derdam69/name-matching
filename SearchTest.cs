@@ -1,8 +1,3 @@
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
-using Newtonsoft.Json;
-
 namespace ElasticsearchIntegrationTests;
 
 public class SearchTest
@@ -199,6 +194,8 @@ public class SearchTest
                   if (service == null)
                   {
                         service = new ElasticsearchService(new Uri("http://localhost:9200"), true);
+
+                  
                         service.IndexDocuments(GetNaturalPersons(), ElasticsearchService.INDEX_NATURAL_PERSON);
                         service.IndexDocuments(GetLegalEntities(), ElasticsearchService.INDEX_LEGAL_ENTITY);
                   
@@ -321,7 +318,7 @@ public class SearchTest
 
       [Theory]
       [InlineData("xx", "IBM America", null, null, null, null)]
-     // [InlineData("xx", "I.B.M.", null, null, null, null)] // passe pas
+      [InlineData("xx", "IBM", null, null, null, null)]
       [InlineData("xx", "Fanny Mae America limited company", null, null, null, null)]
       [InlineData("xx", "Amexco", null, null, null, null)]
       [InlineData("xx", "Amexco America limited company", null, null, null, null)]
