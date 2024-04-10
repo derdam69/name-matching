@@ -9,6 +9,8 @@ namespace ElasticsearchIntegrationTests
         public static string INDEX_NATURAL_PERSON = "wc_np";
         public static string INDEX_LEGAL_ENTITY = "wc_le";
 
+        public ElasticClient ElasticClient { get {return _client;} internal set{} }
+
         public ElasticsearchService(Uri elasticsearchUri, bool deleteIndex)
         {
             var connectionSettings = new ConnectionSettings(elasticsearchUri)
