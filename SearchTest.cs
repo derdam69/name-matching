@@ -385,7 +385,7 @@ public class SearchTest
                     .Text(inputText)
                 );
 
-             System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
+           //  System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
 
             var toBeFound = minimumTokensExpectedInOutput.Split(' ');
             var responseTokens = analyzeResponse.Tokens.Select(t => t.Token).ToList();
@@ -396,26 +396,31 @@ public class SearchTest
 
 
       [Theory]
-      [InlineData("Müller Enterprises", "muller enterprises")]
-      [InlineData("Muller Enterprises", "muller enterprises")]
-      public void UmlautCustomAnalyzerTest(string inputText, string minimumTokensExpectedInOutput)
+      [InlineData("Müller Enterprises", "mull enterpris")]
+      [InlineData("Muller Enterprises", "mull enterpris")]
+      [InlineData("Müllerberg Enterprises", "mullerberg enterpris")]
+      public void German2SnowballTest(string inputText, string minimumTokensExpectedInOutput)
       {
             var analyzeResponse = service.ElasticClient
                 .Indices
                 .Analyze(a => a
                     .Tokenizer("standard")
                     .Filter(f => f
+                    .Snowball( s=> s.Language(Nest.SnowballLanguage.German2))
                         .AsciiFolding(f => f)
                         .Lowercase()
                     )
                     .Text(inputText)
                 );
 
+
             System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
 
             var toBeFound = minimumTokensExpectedInOutput.Split(' ');
             var responseTokens = analyzeResponse.Tokens.Select(t => t.Token).ToList();
-            var inter = responseTokens.Intersect(toBeFound);
+            var inter = responseTokens.Intersect(toBeFound).ToList();
+  System.IO.File.WriteAllText(@$"c:\temp\test_inter.json", JsonConvert.SerializeObject(inter, Formatting.Indented));
+ System.IO.File.WriteAllText(@$"c:\temp\test_tbf.json", JsonConvert.SerializeObject(toBeFound, Formatting.Indented));
 
             Assert.Equal(toBeFound.Count(), inter.Count());
       }
