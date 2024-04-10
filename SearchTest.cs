@@ -358,8 +358,9 @@ public class SearchTest
       [InlineData("U.B.S. corporation.", "ubs corp")]
       [InlineData("Test sàrl", "test sarl")]
       [InlineData("Test S.À.R.L.", "test sarl")]
-      [InlineData("U.B.S. societe a responsabilite limitee", "ubs sarl")]
-      public void LegalEntityCustomAnalyzerTest(string inputText, string tokensExpectedInOutput)
+      [InlineData("U.B.S. societe a responsabilite limitee", "ubs sarl")] 
+     
+      public void LegalEntityCustomAnalyzerTest(string inputText, string minimumTokensExpectedInOutput)
       {
             var analyzeResponse = service.ElasticClient
                 .Indices
@@ -384,9 +385,35 @@ public class SearchTest
                     .Text(inputText)
                 );
 
-            // System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
+             System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
 
-            var toBeFound = tokensExpectedInOutput.Split(' ');
+            var toBeFound = minimumTokensExpectedInOutput.Split(' ');
+            var responseTokens = analyzeResponse.Tokens.Select(t => t.Token).ToList();
+            var inter = responseTokens.Intersect(toBeFound);
+
+            Assert.Equal(toBeFound.Count(), inter.Count());
+      }
+
+
+      [Theory]
+      [InlineData("Müller Enterprises", "muller enterprises")]
+      [InlineData("Muller Enterprises", "muller enterprises")]
+      public void UmlautCustomAnalyzerTest(string inputText, string minimumTokensExpectedInOutput)
+      {
+            var analyzeResponse = service.ElasticClient
+                .Indices
+                .Analyze(a => a
+                    .Tokenizer("standard")
+                    .Filter(f => f
+                        .AsciiFolding(f => f)
+                        .Lowercase()
+                    )
+                    .Text(inputText)
+                );
+
+            System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
+
+            var toBeFound = minimumTokensExpectedInOutput.Split(' ');
             var responseTokens = analyzeResponse.Tokens.Select(t => t.Token).ToList();
             var inter = responseTokens.Intersect(toBeFound);
 
