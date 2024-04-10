@@ -197,17 +197,11 @@ public class SearchTest
                   if (service == null)
                   {
                         service = new ElasticsearchService(new Uri("http://localhost:9200"), true);
-
-
                         service.IndexDocuments(GetNaturalPersons(), ElasticsearchService.INDEX_NATURAL_PERSON);
                         service.IndexDocuments(GetLegalEntities(), ElasticsearchService.INDEX_LEGAL_ENTITY);
-
-                        // Thread.Sleep(1500);
                   }
             }
       }
-
-
 
       [Theory()]
       [InlineData("11", "Sanchez Rosa", null, null, null, "FR")]
@@ -277,7 +271,6 @@ public class SearchTest
             Assert.Equal(target, query.Hits.First().Id);
       }
 
-
       [Theory]
       [InlineData("xx", "Fannie Mae", null, null, null, null)]
       [InlineData("xx", "Jack Hormel Foods Corp.", null, null, null, null)]
@@ -304,7 +297,6 @@ public class SearchTest
             Assert.DoesNotContain(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_NATURAL_PERSON));
             Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
-
 
       [Theory]
       [InlineData("xx", "Jack Hormel Smith Foods", null, null, null, null)]
@@ -385,7 +377,7 @@ public class SearchTest
                     .Text(inputText)
                 );
 
-           //  System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
+            // System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
 
             var toBeFound = minimumTokensExpectedInOutput.Split(' ');
             var responseTokens = analyzeResponse.Tokens.Select(t => t.Token).ToList();
@@ -419,8 +411,6 @@ public class SearchTest
             var toBeFound = minimumTokensExpectedInOutput.Split(' ');
             var responseTokens = analyzeResponse.Tokens.Select(t => t.Token).ToList();
             var inter = responseTokens.Intersect(toBeFound).ToList();
-  System.IO.File.WriteAllText(@$"c:\temp\test_inter.json", JsonConvert.SerializeObject(inter, Formatting.Indented));
- System.IO.File.WriteAllText(@$"c:\temp\test_tbf.json", JsonConvert.SerializeObject(toBeFound, Formatting.Indented));
 
             Assert.Equal(toBeFound.Count(), inter.Count());
       }
