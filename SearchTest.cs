@@ -171,7 +171,8 @@ public class SearchTest
             "Parker-Hannifin Corp.",
             "Jack Hormel Smith Foods Corp.",
             "Amexco",
-            "Goldmann Powell Industries"
+            "Goldmann Powell Industries",
+            "Jurg Muller Enterprises"
             };
 
 
@@ -268,6 +269,8 @@ public class SearchTest
       [InlineData("3", "john and doe limited", null, null, null, null)]
       [InlineData("6", "heinz muller", null, null, null, null)]
       [InlineData("15", "jürg müller", null, null, null, null)]
+      [InlineData("15", "juerg müller", null, null, null, null)]
+      [InlineData("15", "juerg mueller", null, null, null, null)]
       public void NamesTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
@@ -322,6 +325,9 @@ public class SearchTest
       [InlineData("xx", "Amexco America limited company", null, null, null, null)]
       [InlineData("xx", "American Express", null, null, null, null)]
       [InlineData("xx", "American Express America limited company", null, null, null, null)]
+      [InlineData("xx", "Jurg Muller", null, null, null, null)]
+      [InlineData("xx", "Juerg Mueller enterprises", null, null, null, null)]
+      [InlineData("xx", "Jürg Müller enterprises", null, null, null, null)]
       public void Legal_Entity_Common_Terms_Test(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
@@ -342,6 +348,17 @@ public class SearchTest
             // System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
             Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
       }
+
+/* TODO: Make this test pass..
+      [Theory]
+      [InlineData("xx", "U.B.S.", null, null, null, null)]
+          public void Legal_Entity_Dotted_Acronym_Test(string target, string names, string dob, string citizenships, string identification, string location)
+      {
+            var query = service.SearchLegalEntity(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            // System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
+            Assert.Contains(query.Hits, h => h.Source.RecordType.Equals(Record.RECORD_TYPE_LEGAL_ENTITY));
+      }
+*/
 
       [Theory]
       [InlineData("UBS", "ubs")]
