@@ -21,6 +21,7 @@ public class SearchTest
             ret.Add(new Record() { Id = "12", Title = "Dos Santos Sanchez maria Rosa", Dob = "20210203", Citizenships = "CH,BR", Locations = "IT,SP" });
             ret.Add(new Record() { Id = "13", Title = "Jack Smith Hormel" });
             ret.Add(new Record() { Id = "14", Title = "Fannie Mae" });
+            ret.Add(new Record() { Id = "15", Title = "Jurg Muller" });
 
             ret.ForEach(r =>
             {
@@ -256,6 +257,7 @@ public class SearchTest
       public void NamesFuzzyTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
+            // System.IO.File.WriteAllText(@"c:\temp\test.json", JsonConvert.SerializeObject(query.Hits, Formatting.Indented));
             Assert.Equal(target, query.Hits.First().Id);
       }
 
@@ -265,6 +267,7 @@ public class SearchTest
       [InlineData("7", "corenelia ritter", null, null, null, null)]
       [InlineData("3", "john and doe limited", null, null, null, null)]
       [InlineData("6", "heinz muller", null, null, null, null)]
+      [InlineData("15", "jürg müller", null, null, null, null)]
       public void NamesTest(string target, string names, string dob, string citizenships, string identification, string location)
       {
             var query = service.SearchNaturalPerson(new Record() { Title = names, Dob = dob, Citizenships = citizenships, Identifications = identification, Locations = location });
@@ -406,7 +409,7 @@ public class SearchTest
                 );
 
 
-            System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
+            // System.IO.File.WriteAllText(@$"c:\temp\test.json", JsonConvert.SerializeObject(analyzeResponse, Formatting.Indented));
 
             var toBeFound = minimumTokensExpectedInOutput.Split(' ');
             var responseTokens = analyzeResponse.Tokens.Select(t => t.Token).ToList();
