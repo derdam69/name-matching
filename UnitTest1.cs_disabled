@@ -1,0 +1,245 @@
+﻿using System.Runtime.Intrinsics.X86;
+using System.Net.Mime;
+using System.ComponentModel.Design;
+namespace name_match;
+
+using Elasticsearch.Net;
+using Nest;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.IO;
+
+public class UnitTest1
+{
+    const string indexName = "wc-v2";
+
+    private static void Pause()
+    {
+        System.Threading.Thread.Sleep(1000);
+    }
+
+    static bool samplesLoaded = false;
+    public UnitTest1()
+    { if (samplesLoaded)
+        {
+            return;
+        }
+        TestHelpers.CreateIndex(indexName);
+        var client = TestHelpers.ClientFactory(indexName);
+        TestHelpers.IndexSampleData(client, null);
+        samplesLoaded = true;
+    }
+
+    // [Fact]
+    public void Dump_Tokens()
+    {
+
+
+        ElasticClient client = TestHelpers.ClientFactory(indexName);
+
+        var resp = client.IndexDocument(new Record() { FurtherInformation = "Lorem x-123-4 ipsum" });
+        Assert.True(resp.IsValid, "IndexDocument failed: " + resp.ServerError?.Error?.Reason);
+
+
+
+        string toFind;
+
+        toFind = "RARE ASSET MANAGEMENT ENTERPRISES PARTNERS PLC";
+        var analyzed = client.Indices.Analyze(a => a.Index(indexName).Analyzer("allnames_pre_token_analyzer").Text(toFind));
+        var tokens = analyzed.Tokens.Select(t => t.Token).Where(t => !string.IsNullOrWhiteSpace(t)).Select(t => t.ToLowerInvariant()).Distinct().ToList();
+        Assert.True(tokens.Any());
+
+        System.IO.File.WriteAllText(@"c:\temp\index-tokens.json", JsonConvert.SerializeObject(tokens, Formatting.Indented));
+
+    }
+
+    static int totalHits = 0;
+
+    [Theory]
+    /*
+      [InlineData("Carlos HERNANDEZ")]
+      // [InlineData("Mr. Carlas HERNANDEZ 12 Rue des Tests 1304 Lausanne Switzerland")] // Fuzzy
+      [InlineData("Mr. Carlos HERNANDEZ")]
+      [InlineData("Carlos HERNANDEZ 12 Rue des Tests 1304 Lausanne Switzerland")]
+      [InlineData("Carlos et Sofia HERNANDEZ PEREZ")]
+      [InlineData("abc ... eenergy s.o.s.---- Hernandez s.a. common-enterprises! ")]
+      [InlineData("MARTIN Jean-Pierre")]
+      // [InlineData("HERNANDEZ Karlos Lorem Ipsum")] // Fuzzy
+      [InlineData("H.ERNNANDEZ S.A. e-energy")]
+      // [InlineData("MORALTES RIVEIREA")] // Fuzzy
+      [InlineData("1/MAGIC APPEX CAPITAL LIMITED")]
+      [InlineData("FOO PILOT SERVICES BAR")]
+      // [InlineData("HERNANDEZ Carlis")] // Fuzzy
+      [InlineData("PEREZ DIS HERNANDEZ")]
+      // [InlineData("HERNANDES")] // Fuzzy
+      [InlineData("CONSULTING CAPITAL MANAGEMENT PLC")]
+      [InlineData("CONSULTING CAPITAL PLC")]
+      [InlineData("CAPITAL PLC")]
+      [InlineData("abc ... eenergy s.o.s. ---- Hernandez s.a. common-enterprises! ")]
+      [InlineData("PEREZ DE HERNANDEZ Sofia")]
+      [InlineData("alpha foo damien derbes bar baz")]
+      [InlineData("alpha")]
+          [InlineData("HERNANDEZ")]
+   */
+    [InlineData("van damian dorbes")]
+    public void Match_Match_Names_Selector(string toFind)
+    {
+
+
+        ElasticClient client = TestHelpers.ClientFactory(indexName);
+
+        var searchResponse = client.Search<Record>(s => s
+           .Query(q => q
+               .Bool(b => b
+                  .Should(sh => sh
+
+
+                        , b => b
+
+                    .Bool(b => b
+                      .Must(
+
+
+                           mu => mu.Bool(
+                              b => b.Should(
+                                    QueryHelper.MatchNameSelectorFuzzy(toFind)
+
+                                , b => b.Intervals(iv => iv
+                                        .Field(f => f.AllNames.Suffix("pretoken"))
+                                        .Match(mm => mm
+                                                .Query(toFind)
+                                                .MaxGaps(0)
+                                                .Ordered(true)
+                                                .Analyzer("allnames_pre_token_analyzer")
+                                        )
+                                        .Name("AllNames Intervals InOrder")
+                                        .Boost(50)
+                                )
+                            //  ,b => b.Match(m => m.Field(f => f.AllNames.Suffix("pretoken_fuzzy")).Query(toFind).Name("Pretoken loose fuzzy").Operator(Operator.Or).MinimumShouldMatch("2<66% 6<25%").Fuzziness(Fuzziness.EditDistance(1)).FuzzyTranspositions(true))
+
+                            // ngram-based fuzzy-like clause (typo tolerance). Lower boost than exact matches.
+                            // , b => b.Match(m => m.Field(f => f.AllNames.Suffix("ngram")).Query(toFind).Operator(Operator.And).MinimumShouldMatch("80%").Name("AllNames ngram").Boost(5))
+                            )
+                        )
+                      )
+                      .Should(sh =>
+                      sh.Match(m => m.Field(f => f.Domicile).Query("CH").Name("Domicile").Boost(0))
+                      )
+
+                   )
+                )
+
+               )
+           )
+           .Highlight(h =>
+              h.Fields(f => f.Field("*")))
+       );
+
+
+
+        var finalHits = searchResponse.Hits;
+
+        var scores = finalHits.Select(hit => (double)(hit.Score ?? 0f)).ToList();
+        var mean = scores.Any() ? scores.Average() : 0.0;
+        var stdDev = scores.Any() ? Math.Sqrt(scores.Sum(score => Math.Pow(score - mean, 2)) / scores.Count) : 0.0;
+
+        System.IO.File.WriteAllText(@"c:\temp\_search_stat.txt", $"Mean: {mean}  Stddev: {stdDev}\n\n");
+
+        var filteredHits = finalHits;
+
+        // TODO: When any hit has at least a MatchedQuery other than 'AllNamesLoose', 
+        // remove hits that have only 'AllNamesLoose' matched.
+
+        var hasStrongMatch = filteredHits.Any(hit => hit.MatchedQueries != null && hit.MatchedQueries.Where(w => !w.Contains("Domicile")).Any(mq => mq != "Pretoken loose"));
+        if (hasStrongMatch)
+        {
+            filteredHits = filteredHits.Where(hit => !(hit.MatchedQueries.Count() == 1 && hit.MatchedQueries.Contains("Pretoken loose"))).ToList();
+        }
+
+        foreach (var h in filteredHits)
+        {
+            System.IO.File.AppendAllText(@"c:\temp\_search_stat.txt", $"Score: {h.Score}  Z-score: {(h.Score - mean) / stdDev}\n");
+
+        }
+
+        var significantHits = searchResponse.Hits
+            .Where(hit => (hit.Score - mean) / stdDev > 0.1)
+            .ToList();
+
+
+        System.IO.File.WriteAllText(@"c:\temp\_search.json", JsonConvert.SerializeObject(filteredHits, Formatting.Indented));
+
+        totalHits += filteredHits.Count();
+
+        System.IO.File.WriteAllText(@"c:\temp\_search_hits.json", JsonConvert.SerializeObject(totalHits, Formatting.Indented));
+
+
+        Assert.True(searchResponse.Hits.Any(), "Search returned no hits");
+    }
+
+    [Theory]
+    [InlineData("PEREZ DA HERNANDEZ", "DA")]
+    [InlineData("PEREZ DA HERNANDEZ", "DE")]
+    public void FuzzyMustNotMatchNameParticle(string toFind, string mustNotHighlight)
+    {
+        ElasticClient client = TestHelpers.ClientFactory(indexName);
+        var searchResponse = client.Search<Record>(s => s
+           .Query(
+               QueryHelper.MatchNameSelectorFuzzy(toFind)
+            )
+            .Highlight(h =>
+              h.Fields(f => f.Field("*")))
+        );
+
+        Assert.True(searchResponse.Hits.Any());
+
+        Assert.False(searchResponse.Hits.Any(hit =>
+         hit.Highlight != null &&
+         hit.Highlight.First().Value.Any(h => h.Contains($"<em>{mustNotHighlight}</em>"))),
+         $"Hit found with highlighted '{mustNotHighlight}' in allNames.pretoken.fuzzy");
+    }
+    
+    [Theory]
+    [InlineData("NATIONAL SA", "SA")]
+    [InlineData("NATIONAL SA", "SI")]
+    [InlineData("GROUP ASSET-MANAGEMENT S.A.", "S.A.")]
+    [InlineData("GROUP ASSET-MANAGEMENT S.A.", "SA")]
+    [InlineData("GROUP ASSET-MANAGEMENT SA", "SA")]
+    [InlineData("GROUP ASSET-MANAGEMENT SA", "S.A.")]
+    public void FuzzyMustNotMatchCompanyStopWords(string toFind, string mustNotHighlight)
+    {
+       ElasticClient client = TestHelpers.ClientFactory(indexName);
+        var searchResponse = client.Search<Record>(s => s
+           .Query(
+               QueryHelper.MatchNameSelectorFuzzy(toFind)
+            )
+            .Highlight(h =>
+              h.Fields(f => f.Field("*")))
+        );
+
+        Assert.True(searchResponse.Hits.Any());
+
+           Assert.False(searchResponse.Hits.Any(hit => 
+            hit.Highlight != null &&     
+            hit.Highlight.First().Value.Any(h => h.Contains($"<em>{mustNotHighlight}</em>"))), 
+            $"Hit found with highlighted '{mustNotHighlight}' in '{toFind}' in allNames.pretoken.fuzzy");
+    }
+         
+    [Fact]
+    public void It_can_dump_index_analysis()
+    {
+
+        ElasticClient client = TestHelpers.ClientFactory(indexName);
+
+        var analyzed = client.Indices.Analyze(a => a
+             .Index(indexName)
+             .Text("Usrsula VAN DER LAYEN")
+             .Analyzer("allnames_pre_token_analyzer_fuzzy")
+         );
+
+        System.IO.File.WriteAllText(@"c:\temp\_analyzed_dump.json", JsonConvert.SerializeObject(analyzed.Tokens, Formatting.Indented));
+    }
+
+
+}
+
