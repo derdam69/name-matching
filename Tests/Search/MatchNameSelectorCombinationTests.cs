@@ -68,19 +68,13 @@ public class MatchNameSelectorCombinationTests
                         QueryHelper.MatchNameSelectorCombination(toFind)
 
                     )//.Name("Pretoken loose")
-                    .Should(sh =>
-                        sh.Bool(b =>
-                            b.Should(sh => null
-                                // sh.Match(m => m.Field(f => f.Domicile).Query("kkkxxx").Boost(0))
-                                // ,QueryHelper.MatchAllNamesOrdered(toFind)
-                            )
-                        )
+                    .Should( sh => sh
+                       // sh.Match(m => m.Query(toFind).Field(f => f.AllNamesHighlight).Name("allnames_highlight"))
                     )
                 )
            )
-           .Highlight(h =>
-              h.Fields(f => f.Field("*"))
-           )
+           .Highlight(h => h.Fields(f => f.Field("*")))
+          
         );
 
         var finalHits = searchResponse.Hits;
