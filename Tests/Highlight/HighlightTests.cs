@@ -37,17 +37,23 @@ public class HighlightTests
         var searchResponse = client.Search<Record>(s => s
            .Query(q => q
                     .Bool(b => b
-                      .Must(
+                      .Should(
                         QueryHelper.MatchNameSelectorCombination(toFind)
                       )
+                      .Should(sh => sh
+                        .Match(m => m.Field(f => f.AllNamesFuzzy).Query(toFind).Name("AllNamesFuzzy").Operator(Operator.Or)
+                .Fuzziness(Fuzziness.EditDistance(1)).FuzzyTranspositions(false).MinimumShouldMatch("2<50% 5<40% 6<25%"))
+  
+                      )
                     )
+                    
             )
-           // .Highlight(h => h.Fields(f => f.Field("*")))
-           .Highlight(h => h.Fields(f => f
-                    .Field("allNames.pretoken_fuzzy")
-                    .Field("allNames.pretoken")
-                 )
-           ) 
+           .Highlight(h => 
+               h.Fields(f => f
+                .Field(n=>n.AllNames)
+                .Field(n=>n.AllNamesFuzzy)
+               )
+           )
         );
 
         var report = new

@@ -114,6 +114,15 @@ namespace name_match.Helpers
                                     )
                                 )
                             )
+                            .Text(t => t
+                                .Name(n => n.AllNamesFuzzy)
+                                
+                                .Analyzer("allnames_pre_token_analyzer_fuzzy")
+                                        .Similarity("no_tf")
+
+                                .TermVector(TermVectorOption.WithPositionsOffsets)
+                               
+                            )
                            
                         )
                     )

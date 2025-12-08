@@ -26,6 +26,8 @@ namespace name_match
             private set { }
         }
 
+        public string AllNamesFuzzy => AllNames;
+
         public string FurtherInformation { get; set; } // Must contains sample ID card numbers, passport numbers, SSN numbers, etc..
         public string BirthDate { get; set; }
         public string Locations { get; set; }

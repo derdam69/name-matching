@@ -4,3 +4,6 @@ Launch ElasticSearch:
 
 Launch tests and generate HTML report:
  powershell -ExecutionPolicy Bypass -File .\scripts\Run-TestsAndReport.ps1
+
+
+ dir /s /b /a:-d d:\ >c:\temp\t.txt
