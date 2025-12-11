@@ -70,7 +70,15 @@ public class FileNameProcessTest
         ).Where(c => c.Items.Any());
 
         System.IO.File.WriteAllText(@"c:\temp\t-flat-grouped.json", JsonConvert.SerializeObject(grouped, Formatting.Indented));
-    
+
+        var catalog = files.Where(f=>f.File.Contains("\\{MB")).OrderBy(o => o.File).Select(s => new {Label=EvaluateMediaBoxPath(s.File), Path = s.File, Folder = Path.GetDirectoryName(s.File)});
+        var catalogJson = JsonConvert.SerializeObject(catalog, Formatting.Indented);
+
+        var catalogTemplate = $@"
+            var catalog = {catalogJson}
+        ";
+        System.IO.File.WriteAllText(@"c:\temp\Catalog\mb-catalog.js", catalogTemplate);
+
     }
 
     [Fact]

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+
+
+
+<head>
+
+    <title>Browse list</title>
+
+    <style>
+        body {
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background-color: rgb(24, 24, 24);
+
+            color: whitesmoke;
+
+        }
+
+        .list-item {
+
+            color: darkcyan
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+         a {
+            text-decoration: none;
+        }
+
+        .folderIcon {
+            cursor: pointer;
+            min-width: 16px;
+            max-width: 16px;
+        }
+      
+    </style>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+
+</head>
+
+
+
+<body>
+
+    <H2>Browse list</H2>
+
+    Items in list: <span data-bind="text: filteredCatalog().length"></span>
+
+    <p></p>
+
+    <input type="text" data-bind="textInput: filter" placeholder="Filter" />
+    <button onclick="search()">Search</button>
+    <p></p>
+
+
+
+    <div data-bind="foreach: filteredCatalog">
+        <div>
+            <span class="folderIcon" title="Copy location" data-bind="click: function() { copy($data) }">📂 </span>
+            <a class="list-item" data-bind="attr: { href: Path }"><span data-bind="text: Label"></span></a>
+          </div>
+    </div>
+
+        <script src="./mb-catalog.js"></script> <!-- should contain var catalog = [{name:"alpha", ...}] -->
+
+
+
+        <script>
+
+
+           
+            var filter = ko.observable("");
+            var setFilter = ko.observable("");
+
+            function search()
+            {
+                setFilter(filter())
+            }
+
+            function copy(data) {
+                navigator.clipboard.writeText(data.Folder);
+                alert(data.Folder);
+            }
+
+            var filteredCatalog = ko.computed(function () {
+
+                var f = setFilter().toLowerCase();
+
+                if (!f) {
+
+                    return catalog;
+
+                } else {
+
+                    return ko.utils.arrayFilter(catalog, function (item) {
+
+                        return item.Label.toLowerCase().indexOf(f) !== -1;
+
+                    });
+
+                }
+
+            });
+
+
+
+            ko.applyBindings(filter);
+
+
+
+            console.log("ok")
+
+
+
+        </script>
+
+
+
+</html>
