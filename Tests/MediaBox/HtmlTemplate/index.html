@@ -1,86 +1,86 @@
 <!DOCTYPE html>
-
 <html>
+    <head>
+        <title>Browse list</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: rgb(24, 24, 24);
+                color: whitesmoke;
+                padding-left: 8px;
+            }
 
+            .list-item {
+                color: darkcyan
+            }
 
+            a:hover {
+                text-decoration: underline;
+            }
 
-<head>
+            a {
+                text-decoration: none;
+            }
 
-    <title>Browse list</title>
+            .folderIcon {
+                cursor: pointer;
+                min-width: 16px;
+                max-width: 16px;
+            }
+        </style>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    </head>
+    <body>
+        <H2>Browse list</H2>
+        Items in list: <span data-bind="text: filteredCatalog().length"></span>
+        <p></p>
 
-    <style>
-        body {
+        <input type="text" data-bind="textInput: filter" placeholder="Search"/>
+        <!-- <button onclick="search()">Search</button> -->
+        <!-- <a data-bind="attr: {href: buildBlob()}"  download="testblob.m3u">link</a> -->
+        <p></p>
 
-            font-family: Arial, Helvetica, sans-serif;
-
-            background-color: rgb(24, 24, 24);
-
-            color: whitesmoke;
-
-        }
-
-        .list-item {
-
-            color: darkcyan
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-         a {
-            text-decoration: none;
-        }
-
-        .folderIcon {
-            cursor: pointer;
-            min-width: 16px;
-            max-width: 16px;
-        }
-      
-    </style>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
-
-</head>
-
-
-
-<body>
-
-    <H2>Browse list</H2>
-
-    Items in list: <span data-bind="text: filteredCatalog().length"></span>
-
-    <p></p>
-
-    <input type="text" data-bind="textInput: filter" placeholder="Filter" />
-    <button onclick="search()">Search</button>
-    <p></p>
-
-
-
-    <div data-bind="foreach: filteredCatalog">
-        <div>
-            <span class="folderIcon" title="Copy location" data-bind="click: function() { copy($data) }">📂 </span>
-            <a class="list-item" data-bind="attr: { href: Path }"><span data-bind="text: Label"></span></a>
-          </div>
-    </div>
+        <div data-bind="foreach: filteredCatalog">
+            <div>
+                <span class="folderIcon" title="Copy location" data-bind="click: function() { copy($data) }">📂 </span>
+                <a class="list-item" data-bind="attr: { href: Path }"><span data-bind="text: Label"></span></a>
+            </div>
+        </div>
 
         <script src="./mb-catalog.js"></script> <!-- should contain var catalog = [{name:"alpha", ...}] -->
 
-
-
         <script>
+            const ViewModel = function() {
+                const self = this;
+                this.filter = ko.observable("");
+                this.setFilter =  ko.computed(this.filter).extend({rateLimit: {timeout:600, method:  "notifyWhenChangesStop"}});
 
+                this.filteredCatalog = ko.computed(function () {
+                    const f = toNormalForm(self.setFilter()).toLowerCase();
+                    if (!f) {
+                        return []; //catalog;
+                    } else {
+                        const inputs = f.split(" ");
+                        return ko.utils.arrayFilter(catalog, function (item) {
+                            return self.matchAllInputs(item, inputs);
+                        });
+                    }
+                });
 
-           
-            var filter = ko.observable("");
-            var setFilter = ko.observable("");
+                this.matchAllInputs = function(item, inputs) {
+                    if (inputs.length === 1) {
+                        return item.Search.indexOf(inputs[0]) > -1;
+                    }
+                    let i = inputs.length;
+                    while (item.Search.indexOf(inputs[i-1]) > -1) {
+                      i--;
+                    }
+                    return i === 0;
+                }
+            };
 
-            function search()
-            {
-                setFilter(filter())
+            function toNormalForm(str) {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             }
 
             function copy(data) {
@@ -88,38 +88,16 @@
                 alert(data.Folder);
             }
 
-            var filteredCatalog = ko.computed(function () {
+            ko.applyBindings(new ViewModel());
+            console.log("ok");
 
-                var f = setFilter().toLowerCase();
-
-                if (!f) {
-
-                    return catalog;
-
-                } else {
-
-                    return ko.utils.arrayFilter(catalog, function (item) {
-
-                        return item.Label.toLowerCase().indexOf(f) !== -1;
-
-                    });
-
-                }
-
-            });
-
-
-
-            ko.applyBindings(filter);
-
-
-
-            console.log("ok")
-
-
-
+            function buildBlob() {
+                var blobContent = "#EXTM3U\nD:\\{MBVlabel=CDA}\\Air\\Premiers Symptomes\\01-Modular Mix.wav"
+                var blob = new Blob([blobContent]);
+                blob.type = "text/plain";
+                return URL.createObjectURL(blob);
+            }
         </script>
-
-
+    </body>
 
 </html>

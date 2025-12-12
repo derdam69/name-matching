@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Reflection.Emit;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Text;
+using System.Globalization;
 
 public class FileNameProcessTest
 {
@@ -71,7 +73,15 @@ public class FileNameProcessTest
 
         System.IO.File.WriteAllText(@"c:\temp\t-flat-grouped.json", JsonConvert.SerializeObject(grouped, Formatting.Indented));
 
-        var catalog = files.Where(f=>f.File.Contains("\\{MB")).OrderBy(o => o.File).Select(s => new {Label=EvaluateMediaBoxPath(s.File), Path = s.File, Folder = Path.GetDirectoryName(s.File)});
+        var catalog = files.Where(f=>f.File.Contains("\\{MB")).Select(s => new 
+        {
+            Label = EvaluateMediaBoxPath(s.File), 
+            Search = RemoveDiacritics((s.File).ToLower()), 
+            Path = s.File, 
+            Folder = Path.GetDirectoryName(s.File)}
+        )
+        .OrderBy(o => o.Label);
+        
         var catalogJson = JsonConvert.SerializeObject(catalog, Formatting.Indented);
 
         var catalogTemplate = $@"
@@ -80,6 +90,24 @@ public class FileNameProcessTest
         System.IO.File.WriteAllText(@"c:\temp\Catalog\mb-catalog.js", catalogTemplate);
 
     }
+
+    public string RemoveDiacritics(string text) 
+    {
+        var normalizedString = text.Normalize(NormalizationForm.FormD);
+        var stringBuilder = new StringBuilder();
+
+        foreach (var c in normalizedString.EnumerateRunes())
+        {
+            var unicodeCategory = Rune.GetUnicodeCategory(c);
+            if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+            {
+                stringBuilder.Append(c);
+            }
+        }
+
+        return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+    }
+
 
     [Fact]
     public void process_example_json()
