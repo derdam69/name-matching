@@ -1,4 +1,5 @@
 
+using System.Net.NetworkInformation;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Reflection.Emit;
@@ -6,6 +7,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Text;
 using System.Globalization;
+using Nest;
 
 public class FileNameProcessTest
 {
@@ -31,24 +33,17 @@ public class FileNameProcessTest
     public void process_mediabox_paths_from_file()
     {
 
-          var files = from file in Directory.EnumerateFiles(@"D:\", "", SearchOption.AllDirectories)
-                       
+          var files = from file in Directory.EnumerateFiles(@"D:\", "", SearchOption.AllDirectories)   
                         select new
                         {
                             File = file,
-                          
                         };
 
         System.IO.File.WriteAllText(@"c:\temp\_recdir.json", JsonConvert.SerializeObject(files, Formatting.Indented));
-
-      
-
-       
+   
         const string outputFile = @"c:\temp\t-flat.txt";
-
      
-        var lines = files.Select(f => f.File);
-       
+        var lines = files.Select(f => f.File);   
 
         List<MbItem> processedLines = lines.Select(l => new MbItem() {Label=EvaluateMediaBoxPath(l), Path=l}).ToList();
 
@@ -57,8 +52,7 @@ public class FileNameProcessTest
 
         var firstFolder = sortedProcessedLines.Select(l => l.Label.Split("\\").Skip(1).Take(1).Single()).Distinct().ToList();
 
-    
-         System.IO.File.WriteAllLines(@"c:\temp\t-flat-first", firstFolder);
+        System.IO.File.WriteAllLines(@"c:\temp\t-flat-first", firstFolder);
 
         Assert.True(System.IO.File.Exists(outputFile), $"Output file {outputFile} was not created");
     
@@ -88,6 +82,21 @@ public class FileNameProcessTest
             var catalog = {catalogJson}
         ";
         System.IO.File.WriteAllText(@"c:\temp\Catalog\mb-catalog.js", catalogTemplate);
+
+        // generate eChart data file for Treemap
+        var tm = grouped.Select(g => new 
+        {
+            name = g.Collection, 
+            children = g.Items.Select(i => new {name=System.IO.Path.GetDirectoryName(i.Label), value = 14}).Distinct(),
+            value = g.Items.Select(i => new {name=System.IO.Path.GetDirectoryName(i.Label), value = 14}).Distinct().Count(),
+   
+        });
+
+        var tmJson = JsonConvert.SerializeObject(tm, Formatting.Indented);
+        catalogTemplate = $@"
+            var collections = {tmJson}
+        ";
+        System.IO.File.WriteAllText(@"c:\temp\catalog\t-flat-grouped-echart.js", catalogTemplate);
 
     }
 

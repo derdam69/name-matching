@@ -40,6 +40,8 @@
         <!-- <a data-bind="attr: {href: buildBlob()}"  download="testblob.m3u">link</a> -->
         <p></p>
 
+        <div id="myChart" style="width:1680px; height: 800px;"></div>
+
         <div data-bind="foreach: filteredCatalog">
             <div>
                 <span class="folderIcon" title="Copy location" data-bind="click: function() { copy($data) }">📂 </span>
@@ -47,9 +49,109 @@
             </div>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+        <script src="./t-flat-grouped-echart.js"></script> <!-- should contain var catalog = [{name:"alpha", ...}] -->
+
+
+
+
         <script src="./mb-catalog.js"></script> <!-- should contain var catalog = [{name:"alpha", ...}] -->
 
         <script>
+
+            var chartDom = document.getElementById('myChart');
+            var myChart = echarts.init(chartDom);
+            var option;
+
+            function getLevelOption() {
+                return [
+                    {
+                        itemStyle: {
+                            borderColor: '#777',
+                            borderWidth: 0,
+                            gapWidth: 1
+                        },
+                        upperLabel: {
+                            show: false
+                        }
+                    },
+                    {
+                        itemStyle: {
+                            borderColor: '#555',
+                            borderWidth: 5,
+                            gapWidth: 1
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                borderColor: '#ddd'
+                            }
+                        }
+                    },
+                    {
+                        colorSaturation: [0.35, 0.5],
+                        itemStyle: {
+                            borderWidth: 5,
+                            gapWidth: 1,
+                            borderColorSaturation: 0.6
+                        }
+                    }
+                ];
+            }
+
+            option = {
+                series: [
+                    {
+                        type: 'treemap',
+                        label: {
+                            show: true,
+                            formatter: '{b}'
+                        },
+                        upperLabel: {
+                            show: true,
+                            height: 30
+                        },
+                        itemStyle: {
+                            borderColor: '#fff'
+                        },
+                        levels: getLevelOption(),
+                        data: [],
+                        olddata: [
+                            {
+                                name: 'nodeA',
+                                value: 10,
+                                children: [
+                                    {
+                                        name: 'nodeAa',
+                                        value: 4
+                                    },
+                                    {
+                                        name: 'nodeAb',
+                                        value: 6
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'nodeB',
+                                value: 20,
+                                children: [
+                                    {
+                                        name: 'nodeBa',
+                                        value: 20,
+                                        children: [
+                                            {
+                                                name: 'nodeBa1',
+                                                value: 20
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            };
+
+
             const ViewModel = function() {
                 const self = this;
                 this.filter = ko.observable("");
@@ -62,17 +164,36 @@
                     } else {
                         const inputs = f.split(" ");
                         return ko.utils.arrayFilter(catalog, function (item) {
-                            return self.matchAllInputs(item, inputs);
+                            return self.matchAllInputs(item.Search, inputs);
                         });
                     }
                 });
 
+                this.filteredCollections = ko.computed(function () {
+                    const f = toNormalForm(self.setFilter()).toLowerCase();
+                    if (!f) {
+                        return [];
+                    } else {
+                        const inputs = f.split(" ");
+                        var filtered = ko.utils.arrayFilter(collections, function (item) {
+                            return self.matchAllInputs(item.name.toLowerCase(), inputs);
+                        });
+                        console.log("filtered", filtered);
+                        option.series[0].data = filtered;
+                        myChart.setOption(option);
+                        return filtered;
+                    }
+                });
+
+
+
+
                 this.matchAllInputs = function(item, inputs) {
                     if (inputs.length === 1) {
-                        return item.Search.indexOf(inputs[0]) > -1;
+                        return item.indexOf(inputs[0]) > -1;
                     }
                     let i = inputs.length;
-                    while (item.Search.indexOf(inputs[i-1]) > -1) {
+                    while (item.indexOf(inputs[i-1]) > -1) {
                       i--;
                     }
                     return i === 0;
@@ -88,7 +209,8 @@
                 alert(data.Folder);
             }
 
-            ko.applyBindings(new ViewModel());
+            var vm = new ViewModel();
+            ko.applyBindings(vm);
             console.log("ok");
 
             function buildBlob() {
@@ -97,6 +219,13 @@
                 blob.type = "text/plain";
                 return URL.createObjectURL(blob);
             }
+
+
+
+
+
+        //    option && myChart.setOption(option);
+
         </script>
     </body>
 
