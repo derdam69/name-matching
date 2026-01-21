@@ -27,17 +27,92 @@ public class FileNameProcessTest
         Assert.Equal(expected, evaluatedInput);
     }
 
+    [Fact]
+    public void generate_treeemap_from_folder()
+    {
+        const string rootPath = @"D:\";
+        const string outputFile = @"c:\temp\folder-treemap.json";
 
+        try
+        {
+            var treeStructure = BuildTreeStructure(rootPath);
+            var json = JsonConvert.SerializeObject(treeStructure, Formatting.Indented);
+            System.IO.File.WriteAllText(outputFile, json);
+            Assert.True(System.IO.File.Exists(outputFile), $"Output file {outputFile} was not created");
+         var catalogTemplate = $@"
+            var collections = [{json}]
+        ";
+        System.IO.File.WriteAllText(@"c:\temp\catalog\t-flat-grouped-echart.js", catalogTemplate);
+
+       
+        }
+        catch (Exception ex)
+        {
+            Assert.True(false, $"Error building tree: {ex.Message}");
+        }
+    }
+
+    private dynamic BuildTreeStructure(string path)
+    {
+        try
+        {
+            var dirInfo = new DirectoryInfo(path);
+            var children = new List<dynamic>();
+            int fileCount = 0;
+
+            // Enumerate subdirectories
+            try
+            {
+                foreach (var dir in dirInfo.EnumerateDirectories())
+                {
+                    var subTree = BuildTreeStructure(dir.FullName);
+                    children.Add(subTree);
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // Skip directories we can't access
+            }
+
+            // Enumerate files
+            try
+            {
+                foreach (var file in dirInfo.EnumerateFiles())
+                {
+                    fileCount++;
+                    children.Add(new {name = file.Name, children=new string[0], value = 1});
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // Skip if we can't access files
+            }
+
+            // Build the node structure for eChart treemap
+            var node = new
+            {
+                name = dirInfo.Name ?? Path.GetPathRoot(path),
+                children = children.Count > 0 ? children : (object)null,
+                value = fileCount + children.Sum(c => (int?)c.value ?? 0)
+            };
+
+            return node;
+        }
+        catch (Exception ex)
+        {
+            return new { name = path, value = 0, error = ex.Message };
+        }
+    }
 
     [Fact]
     public void process_mediabox_paths_from_file()
     {
 
           var files = from file in Directory.EnumerateFiles(@"D:\", "", SearchOption.AllDirectories)   
-                        select new
-                        {
-                            File = file,
-                        };
+            select new
+            {
+                File = file,
+            };
 
         System.IO.File.WriteAllText(@"c:\temp\_recdir.json", JsonConvert.SerializeObject(files, Formatting.Indented));
    
@@ -50,26 +125,10 @@ public class FileNameProcessTest
         var sortedProcessedLines = processedLines.ToList().OrderBy(o => o.Label).ToList();
         System.IO.File.WriteAllLines(outputFile, sortedProcessedLines.Select(s => s.Label));
 
-        var firstFolder = sortedProcessedLines.Select(l => l.Label.Split("\\").Skip(1).Take(1).Single()).Distinct().ToList();
-
-        System.IO.File.WriteAllLines(@"c:\temp\t-flat-first", firstFolder);
-
         Assert.True(System.IO.File.Exists(outputFile), $"Output file {outputFile} was not created");
-    
-        // generate grouped by first folder
-
-        var grouped = firstFolder.Select(f => new MbCollection {
-            Collection = f,
-             Items = processedLines.Where(l => l.Label.StartsWith(@$"\{f}\"))
-            .Select(l => new MbItem() {Label=$"{l.Label.Replace(@$"\{f}\","")}", Path=l.Path} )    
-         }
-        ).Where(c => c.Items.Any());
-
-        System.IO.File.WriteAllText(@"c:\temp\t-flat-grouped.json", JsonConvert.SerializeObject(grouped, Formatting.Indented));
-
         var catalog = files.Where(f=>f.File.Contains("\\{MB")).Select(s => new 
         {
-            Label = EvaluateMediaBoxPath(s.File), 
+            Label = EvaluateMediaBoxPath(s.File).Replace("\\"," • "), 
             Search = RemoveDiacritics((s.File).ToLower()), 
             Path = s.File, 
             Folder = Path.GetDirectoryName(s.File)}
@@ -82,22 +141,6 @@ public class FileNameProcessTest
             var catalog = {catalogJson}
         ";
         System.IO.File.WriteAllText(@"c:\temp\Catalog\mb-catalog.js", catalogTemplate);
-
-        // generate eChart data file for Treemap
-        var tm = grouped.Select(g => new 
-        {
-            name = g.Collection, 
-            children = g.Items.Select(i => new {name=System.IO.Path.GetDirectoryName(i.Label), value = 14}).Distinct(),
-            value = g.Items.Select(i => new {name=System.IO.Path.GetDirectoryName(i.Label), value = 14}).Distinct().Count(),
-   
-        });
-
-        var tmJson = JsonConvert.SerializeObject(tm, Formatting.Indented);
-        catalogTemplate = $@"
-            var collections = {tmJson}
-        ";
-        System.IO.File.WriteAllText(@"c:\temp\catalog\t-flat-grouped-echart.js", catalogTemplate);
-
     }
 
     public string RemoveDiacritics(string text) 
@@ -250,7 +293,11 @@ public class FileNameProcessTest
             @"^d:\\{MBVLabel=[^}]*}" + skipPattern, 
             @"\",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-        
+       
+        if (result.StartsWith("\\") && result.Length > 1)
+        {
+             return result.Substring(1);
+        }
         return result;
     }
 }

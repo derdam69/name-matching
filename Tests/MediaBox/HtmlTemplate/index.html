@@ -27,6 +27,106 @@
                 min-width: 16px;
                 max-width: 16px;
             }
+
+            #open-folder {
+                cursor: pointer;
+            }
+
+            #open-folder .folder-default {
+                display: inline;
+            }
+
+            #open-folder .folder-hover {
+                display: none;
+            }
+
+            #open-folder:hover .folder-default {
+                display: none;
+            }
+
+            #open-folder:hover .folder-hover {
+                display: inline;
+            }
+
+            #play-folder {
+                cursor: pointer;
+            }
+
+            #play-folder .folder-default {
+                display: inline;
+            }
+
+            #play-folder .folder-hover {
+                display: none;
+            }
+
+            #play-folder:hover .folder-default {
+                display: none;
+            }
+
+            #play-folder:hover .folder-hover {
+                display: inline;
+            }
+
+            #enqueue-folder {
+                cursor: pointer;
+            }
+
+            #enqueue-folder .folder-default {
+                display: inline;
+            }
+
+            #enqueue-folder .folder-hover {
+                display: none;
+            }
+
+            #enqueue-folder:hover .folder-default {
+                display: none;
+            }
+
+            #enqueue-folder:hover .folder-hover {
+                display: inline;
+            }
+
+            #play-file {
+                cursor: pointer;
+            }
+
+            #play-file .file-default {
+                display: inline;
+            }
+
+            #play-file .file-hover {
+                display: none;
+            }
+
+            #play-file:hover .file-default {
+                display: none;
+            }
+
+            #play-file:hover .file-hover {
+                display: inline;
+            }
+
+            #enqueue-file {
+                cursor: pointer;
+            }
+
+            #enqueue-file .file-default {
+                display: inline;
+            }
+
+            #enqueue-file .file-hover {
+                display: none;
+            }
+
+            #enqueue-file:hover .file-default {
+                display: none;
+            }
+
+            #enqueue-file:hover .file-hover {
+                display: inline;
+            }
         </style>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
     </head>
@@ -37,120 +137,26 @@
 
         <input type="text" data-bind="textInput: filter" placeholder="Search"/>
         <!-- <button onclick="search()">Search</button> -->
-        <!-- <a data-bind="attr: {href: buildBlob()}"  download="testblob.m3u">link</a> -->
+        <!-- <a data-bind="attr: {href: buildBlob()}"  download="testblob.bat">link</a> -->
         <p></p>
-
-        <div id="myChart" style="width:1680px; height: 800px;"></div>
 
         <div data-bind="foreach: filteredCatalog">
             <div>
-                <span class="folderIcon" title="Copy location" data-bind="click: function() { copy($data) }">📂 </span>
+
+                <!-- ▶️ -->
+                 <span id="open-folder" title="Open location" data-bind="click: function() { explore($data) }"><img class="folder-default" src=".//assets/folder-mono.svg"/><img class="folder-hover" src=".//assets/folder.svg"/></span>
+                <span id="play-folder" title="Play folder" data-bind="click: function() { playFolder($data) }"><img class="folder-default" src=".//assets/folder-play-mono.svg"/><img class="folder-hover" src=".//assets/folder-play.svg"/></span>
+                <span id="enqueue-folder" title="Enqueue folder" data-bind="click: function() { enqueueFolder($data) }"><img class="folder-default" src=".//assets/folder-plus-mono.svg"/><img class="folder-hover" src=".//assets/folder-plus.svg"/></span>
+                <span id="play-file" title="Play file" data-bind="click: function() { playFile($data) }"><img class="file-default" src=".//assets/play-mono.svg"/><img class="file-hover" src=".//assets/play.svg"/></span>
+                <span id="enqueue-file" title="Enqueue file" data-bind="click: function() { enqueueFile($data) }"><img class="file-default" src=".//assets/enqueue-mono.svg"/><img class="file-hover" src=".//assets/enqueue.svg"/></span>
+
                 <a class="list-item" data-bind="attr: { href: Path }"><span data-bind="text: Label"></span></a>
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
-        <script src="./t-flat-grouped-echart.js"></script> <!-- should contain var catalog = [{name:"alpha", ...}] -->
-
-
-
-
         <script src="./mb-catalog.js"></script> <!-- should contain var catalog = [{name:"alpha", ...}] -->
 
         <script>
-
-            var chartDom = document.getElementById('myChart');
-            var myChart = echarts.init(chartDom);
-            var option;
-
-            function getLevelOption() {
-                return [
-                    {
-                        itemStyle: {
-                            borderColor: '#777',
-                            borderWidth: 0,
-                            gapWidth: 1
-                        },
-                        upperLabel: {
-                            show: false
-                        }
-                    },
-                    {
-                        itemStyle: {
-                            borderColor: '#555',
-                            borderWidth: 5,
-                            gapWidth: 1
-                        },
-                        emphasis: {
-                            itemStyle: {
-                                borderColor: '#ddd'
-                            }
-                        }
-                    },
-                    {
-                        colorSaturation: [0.35, 0.5],
-                        itemStyle: {
-                            borderWidth: 5,
-                            gapWidth: 1,
-                            borderColorSaturation: 0.6
-                        }
-                    }
-                ];
-            }
-
-            option = {
-                series: [
-                    {
-                        type: 'treemap',
-                        label: {
-                            show: true,
-                            formatter: '{b}'
-                        },
-                        upperLabel: {
-                            show: true,
-                            height: 30
-                        },
-                        itemStyle: {
-                            borderColor: '#fff'
-                        },
-                        levels: getLevelOption(),
-                        data: [],
-                        olddata: [
-                            {
-                                name: 'nodeA',
-                                value: 10,
-                                children: [
-                                    {
-                                        name: 'nodeAa',
-                                        value: 4
-                                    },
-                                    {
-                                        name: 'nodeAb',
-                                        value: 6
-                                    }
-                                ]
-                            },
-                            {
-                                name: 'nodeB',
-                                value: 20,
-                                children: [
-                                    {
-                                        name: 'nodeBa',
-                                        value: 20,
-                                        children: [
-                                            {
-                                                name: 'nodeBa1',
-                                                value: 20
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            };
-
 
             const ViewModel = function() {
                 const self = this;
@@ -169,25 +175,6 @@
                     }
                 });
 
-                this.filteredCollections = ko.computed(function () {
-                    const f = toNormalForm(self.setFilter()).toLowerCase();
-                    if (!f) {
-                        return [];
-                    } else {
-                        const inputs = f.split(" ");
-                        var filtered = ko.utils.arrayFilter(collections, function (item) {
-                            return self.matchAllInputs(item.name.toLowerCase(), inputs);
-                        });
-                        console.log("filtered", filtered);
-                        option.series[0].data = filtered;
-                        myChart.setOption(option);
-                        return filtered;
-                    }
-                });
-
-
-
-
                 this.matchAllInputs = function(item, inputs) {
                     if (inputs.length === 1) {
                         return item.indexOf(inputs[0]) > -1;
@@ -204,9 +191,49 @@
                 return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             }
 
-            function copy(data) {
-                navigator.clipboard.writeText(data.Folder);
-                alert(data.Folder);
+            function explore(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "EXPLORE",
+                    Payload: data.Folder,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
+            }
+
+            function playFolder(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "PLAY",
+                    Payload: data.Folder,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
+            }
+
+            function playFile(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "PLAY",
+                    Payload: data.Path,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
+            }
+
+            function enqueueFolder(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "ENQUEUE",
+                    Payload: data.Folder,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
+            }
+
+            function enqueueFile(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "ENQUEUE",
+                    Payload: data.Path,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
             }
 
             var vm = new ViewModel();
@@ -214,17 +241,13 @@
             console.log("ok");
 
             function buildBlob() {
-                var blobContent = "#EXTM3U\nD:\\{MBVlabel=CDA}\\Air\\Premiers Symptomes\\01-Modular Mix.wav"
+             //   var blobContent = "#EXTM3U\nD:\\{MBVlabel=CDA}\\Air\\Premiers Symptomes\\01-Modular Mix.wav"
+                var blobContent = 'explorer.exe "D:\\{MBVlabel=CDA}\\Air\\Premiers Symptomes\\"'
+
                 var blob = new Blob([blobContent]);
                 blob.type = "text/plain";
                 return URL.createObjectURL(blob);
             }
-
-
-
-
-
-        //    option && myChart.setOption(option);
 
         </script>
     </body>

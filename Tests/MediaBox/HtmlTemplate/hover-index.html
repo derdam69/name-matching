@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Items  list</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: rgb(24, 24, 24);
+                color: whitesmoke;
+            }
+
+            .list-item {
+                color: darkcyan;
+                display: flex;
+                flex-direction: row;
+            }
+
+            .item-row {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .item-row :hover {
+                background-color: #322d2d;
+            }
+
+            .toolbar-container {
+                min-width: 200px;
+                max-width: 200px;
+            }
+
+            .tools {
+                background-color: darkslategray;
+                display: none;
+            }
+
+            /* Show .tools when hovering over .item-row */
+            .list-item:hover .tools {
+                display: block;
+                background-color; /* Optional: for visibility */
+            }
+
+        </style>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    </head>
+
+    <body>
+	    <div class="toolbar-container">
+           
+	    </div>
+        Items in list: <span data-bind="text: filteredCatalog().length"></span>
+        <p></p>
+        <input type="text" data-bind="textInput: filter" placeholder="Filter" />
+        <p></p>
+
+        <div data-bind="foreach: filteredCatalog" class="item-row">
+            <div class="list-item">
+                <span class="toolbar-container">
+	                <div class="tools">
+		                Lorem Ipsum Toolbar
+	                </div>
+                </span>
+                <span data-bind="text: $data.name"></span>
+                <a data-bind="attr: {href: buildBlob()}" download="testblob.cmd">link</a>
+            </div>
+
+        </div>
+
+        <script src="./catalog.js"></script>  <!-- should contain var catalog = [{name:"alpha", ...}] -->
+
+        <script>
+
+            var filter = ko.observable("");
+            var delayedFilter = ko.computed(filter).extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } });
+
+            var filteredCatalog = ko.computed(function () {
+                var f = delayedFilter().toLowerCase();
+                if (!f) {
+                    return catalog;
+                } else {
+                    return ko.utils.arrayFilter(catalog, function (item) {
+                        return item.name.toLowerCase().indexOf(f) !== -1;
+                    });
+                }
+            })
+
+            function buildBlob() {
+                //var blobContent = "#EXTM3U\nc:\\media\\Blob contains lorem ipsum.wav"
+                var blobContent = 'start explorer.exe "c:\\temp\\"';
+                var blob = new Blob([blobContent]);
+                blob.type = "application/octet-stream";
+                return URL.createObjectURL(blob);
+            }
+
+            ko.applyBindings(filter);
+
+            console.log("ok")
+
+            const str = "Crème Brulée";
+            const normalized = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            console.log(normalized); // Outputs: Creme Brulee
+
+        </script>
+
+</html>
