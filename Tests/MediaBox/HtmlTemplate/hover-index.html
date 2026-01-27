@@ -1,106 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Header Example</title>
+    <style>
+        :root {
+        /* named palette colors */
+        --color-blue-sapphire: #0f53bc;
+        --color-blue-fog-of-war: #0e2236;
+        --color-falu-red: #831914;
+        --color-rembrandt-ruby: #974d46;
+        --color-dark-side-of-the-moon: #070c0b;
+        --color-vampire-black: #070707;
 
-    <head>
-        <title>Items  list</title>
-        <style>
-            body {
-                font-family: Arial, Helvetica, sans-serif;
-                background-color: rgb(24, 24, 24);
-                color: whitesmoke;
-            }
+        /* 60-30-10 rule selection */
+        --color-primary: var(--color-vampire-black);  /*var(--color-dark-side-of-the-moon); */
+        --color-primary_: var(--color-dark-side-of-the-moon);
+        --color-secondary: whitesmoke;
+        --color-secondary-muted: color-mix(in oklab, var(--color-secondary), black 30%);
+        --color-accent: var(--color-blue-sapphire);
+        --color-accent-muted:  color-mix(in oklab, var(--color-accent), black 30%);
+        --color-primary-muted: color-mix(in oklab, var(--color-primary), white 20%);
+        --color-primary-muted-10: color-mix(in oklab, var(--color-primary), white 10%);
 
-            .list-item {
-                color: darkcyan;
-                display: flex;
-                flex-direction: row;
-            }
 
-            .item-row {
-                display: flex;
-                flex-direction: column;
-            }
+        /* named usage colors */
+        --color-text: var(--color-secondary);
+        --color-border: var(--color-primary-muted);
+        --color-hover: var(--color-primary-muted-10);
+        --color-bg: var(--color-primary);
+        --color-bg-muted: var(--color-primary-muted-10);
+        }
 
-            .item-row :hover {
-                background-color: #322d2d;
-            }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            z-index: 1000;
+        }
+        .content {
+            height: 2000px; /* For demonstration purposes */
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
 
-            .toolbar-container {
-                min-width: 200px;
-                max-width: 200px;
-            }
+    <div class="header">
+        <h1>Sticky Header</h1>
+    </div>
 
-            .tools {
-                background-color: darkslategray;
-                display: none;
-            }
+    <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
 
-            /* Show .tools when hovering over .item-row */
-            .list-item:hover .tools {
-                display: block;
-                background-color; /* Optional: for visibility */
-            }
-
-        </style>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
-    </head>
-
-    <body>
-	    <div class="toolbar-container">
-           
-	    </div>
-        Items in list: <span data-bind="text: filteredCatalog().length"></span>
-        <p></p>
-        <input type="text" data-bind="textInput: filter" placeholder="Filter" />
-        <p></p>
-
-        <div data-bind="foreach: filteredCatalog" class="item-row">
-            <div class="list-item">
-                <span class="toolbar-container">
-	                <div class="tools">
-		                Lorem Ipsum Toolbar
-	                </div>
-                </span>
-                <span data-bind="text: $data.name"></span>
-                <a data-bind="attr: {href: buildBlob()}" download="testblob.cmd">link</a>
-            </div>
-
-        </div>
-
-        <script src="./catalog.js"></script>  <!-- should contain var catalog = [{name:"alpha", ...}] -->
-
-        <script>
-
-            var filter = ko.observable("");
-            var delayedFilter = ko.computed(filter).extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } });
-
-            var filteredCatalog = ko.computed(function () {
-                var f = delayedFilter().toLowerCase();
-                if (!f) {
-                    return catalog;
-                } else {
-                    return ko.utils.arrayFilter(catalog, function (item) {
-                        return item.name.toLowerCase().indexOf(f) !== -1;
-                    });
-                }
-            })
-
-            function buildBlob() {
-                //var blobContent = "#EXTM3U\nc:\\media\\Blob contains lorem ipsum.wav"
-                var blobContent = 'start explorer.exe "c:\\temp\\"';
-                var blob = new Blob([blobContent]);
-                blob.type = "application/octet-stream";
-                return URL.createObjectURL(blob);
-            }
-
-            ko.applyBindings(filter);
-
-            console.log("ok")
-
-            const str = "Crème Brulée";
-            const normalized = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            console.log(normalized); // Outputs: Creme Brulee
-
-        </script>
-
+</body>
 </html>

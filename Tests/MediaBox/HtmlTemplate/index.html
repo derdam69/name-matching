@@ -1,165 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
-        <title>Browse list</title>
-        <style>
-            body {
-                font-family: Arial, Helvetica, sans-serif;
-                background-color: rgb(24, 24, 24);
-                color: whitesmoke;
-                padding-left: 8px;
-            }
-
-            .list-item {
-                color: darkcyan
-            }
-
-            a:hover {
-                text-decoration: underline;
-            }
-
-            a {
-                text-decoration: none;
-            }
-
-            .folderIcon {
-                cursor: pointer;
-                min-width: 16px;
-                max-width: 16px;
-            }
-
-            #open-folder {
-                cursor: pointer;
-            }
-
-            #open-folder .folder-default {
-                display: inline;
-            }
-
-            #open-folder .folder-hover {
-                display: none;
-            }
-
-            #open-folder:hover .folder-default {
-                display: none;
-            }
-
-            #open-folder:hover .folder-hover {
-                display: inline;
-            }
-
-            #play-folder {
-                cursor: pointer;
-            }
-
-            #play-folder .folder-default {
-                display: inline;
-            }
-
-            #play-folder .folder-hover {
-                display: none;
-            }
-
-            #play-folder:hover .folder-default {
-                display: none;
-            }
-
-            #play-folder:hover .folder-hover {
-                display: inline;
-            }
-
-            #enqueue-folder {
-                cursor: pointer;
-            }
-
-            #enqueue-folder .folder-default {
-                display: inline;
-            }
-
-            #enqueue-folder .folder-hover {
-                display: none;
-            }
-
-            #enqueue-folder:hover .folder-default {
-                display: none;
-            }
-
-            #enqueue-folder:hover .folder-hover {
-                display: inline;
-            }
-
-            #play-file {
-                cursor: pointer;
-            }
-
-            #play-file .file-default {
-                display: inline;
-            }
-
-            #play-file .file-hover {
-                display: none;
-            }
-
-            #play-file:hover .file-default {
-                display: none;
-            }
-
-            #play-file:hover .file-hover {
-                display: inline;
-            }
-
-            #enqueue-file {
-                cursor: pointer;
-            }
-
-            #enqueue-file .file-default {
-                display: inline;
-            }
-
-            #enqueue-file .file-hover {
-                display: none;
-            }
-
-            #enqueue-file:hover .file-default {
-                display: none;
-            }
-
-            #enqueue-file:hover .file-hover {
-                display: inline;
-            }
-        </style>
+        <meta charset="UTF-8">
+        <title>Collection</title>
+         <link rel="stylesheet" href="./styles/style.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
     </head>
     <body>
-        <H2>Browse list</H2>
-        Items in list: <span data-bind="text: filteredCatalog().length"></span>
-        <p></p>
+        <div class="header">
+           
+            <input id="search" class="search-input" type="text" spellcheck="false" data-bind="textInput: filter" placeholder="Search collection"/>
+               </div>
+        <div class="content">
+            <div>
+                <label class="slide-toggle">
+                    <input type="checkbox" data-bind="checked: canPlayToggled">
+                    <span class="slider"></span>
+                </label>
+                <span data-bind="text: canPlayToggled() ? 'Play enabled' : 'Play disabled'"></span>
+            </div>
 
-        <input type="text" data-bind="textInput: filter" placeholder="Search"/>
-        <!-- <button onclick="search()">Search</button> -->
+          <!--  <div class="text-muted">&nbsp;items in list: <span data-bind="text: filteredCatalog().length"></span></div> -->
+   
+            <div data-bind="foreach: filteredCatalog" class="item-row">
+                <div class="list-item">
+                    <span class="toolbar-container">
+                        <div class="tools">
+                           
+                            <span id="open-folder" title="Open location" data-bind="click: function() { explore($data) }"><img class="folder-default" src=".//assets/folder-mono.svg"/><img class="folder-hover" src=".//assets/folder.svg"/></span>
+                            <span id="play-folder" title="Play folder" data-bind="visible: vm.canPlayToggled, click: function() { playFolder($data) }"><img class="folder-default" src=".//assets/folder-play-mono.svg"/><img class="folder-hover" src=".//assets/folder-play.svg"/></span>
+                            <span id="enqueue-folder" title="Enqueue folder" data-bind="click: function() { enqueueFolder($data) }"><img class="folder-default" src=".//assets/folder-plus-mono.svg"/><img class="folder-hover" src=".//assets/folder-plus.svg"/></span>
+                            <span id="play-file" title="Play file" data-bind="visible: vm.canPlayToggled,click: function() { playFile($data) }"><img class="file-default" src=".//assets/play-mono.svg"/><img class="file-hover" src=".//assets/play.svg"/></span>
+                            <span id="enqueue-file" title="Enqueue file" data-bind="click: function() { enqueueFile($data) }"><img class="file-default" src=".//assets/enqueue-mono.svg"/><img class="file-hover" src=".//assets/enqueue.svg"/></span>
+                        </div>
+                    </span>
+                    <a class="list-item" data-bind="attr: { href: Path }"><span data-bind="text: Label"></span></a>
+                </div>
+            </div>
+        </div>
+
+         <!-- <button onclick="search()">Search</button> -->
         <!-- <a data-bind="attr: {href: buildBlob()}"  download="testblob.bat">link</a> -->
         <p></p>
 
+           
+       <!--
         <div data-bind="foreach: filteredCatalog">
             <div>
-
-                <!-- ▶️ -->
-                 <span id="open-folder" title="Open location" data-bind="click: function() { explore($data) }"><img class="folder-default" src=".//assets/folder-mono.svg"/><img class="folder-hover" src=".//assets/folder.svg"/></span>
+                <span id="open-folder" title="Open location" data-bind="click: function() { explore($data) }"><img class="folder-default" src=".//assets/folder-mono.svg"/><img class="folder-hover" src=".//assets/folder.svg"/></span>
                 <span id="play-folder" title="Play folder" data-bind="click: function() { playFolder($data) }"><img class="folder-default" src=".//assets/folder-play-mono.svg"/><img class="folder-hover" src=".//assets/folder-play.svg"/></span>
                 <span id="enqueue-folder" title="Enqueue folder" data-bind="click: function() { enqueueFolder($data) }"><img class="folder-default" src=".//assets/folder-plus-mono.svg"/><img class="folder-hover" src=".//assets/folder-plus.svg"/></span>
                 <span id="play-file" title="Play file" data-bind="click: function() { playFile($data) }"><img class="file-default" src=".//assets/play-mono.svg"/><img class="file-hover" src=".//assets/play.svg"/></span>
                 <span id="enqueue-file" title="Enqueue file" data-bind="click: function() { enqueueFile($data) }"><img class="file-default" src=".//assets/enqueue-mono.svg"/><img class="file-hover" src=".//assets/enqueue.svg"/></span>
-
                 <a class="list-item" data-bind="attr: { href: Path }"><span data-bind="text: Label"></span></a>
             </div>
         </div>
-
+         -->
         <script src="./mb-catalog.js"></script> <!-- should contain var catalog = [{name:"alpha", ...}] -->
 
         <script>
 
             const ViewModel = function() {
                 const self = this;
+                this.canPlayToggled = ko.observable(false);
                 this.filter = ko.observable("");
                 this.setFilter =  ko.computed(this.filter).extend({rateLimit: {timeout:600, method:  "notifyWhenChangesStop"}});
 
@@ -201,6 +105,9 @@
             }
 
             function playFolder(data) {
+                if (vm.canPlayToggled() == false) {
+                    alert("Play disabled")
+                }   return
                 var cmd = {
                     ClipWatchEventId: Date.now(),
                     Command: "PLAY",
@@ -210,6 +117,9 @@
             }
 
             function playFile(data) {
+                if (vm.canPlayToggled() == false) {
+                    alert("Play disabled")
+                }   
                 var cmd = {
                     ClipWatchEventId: Date.now(),
                     Command: "PLAY",
@@ -239,6 +149,7 @@
             var vm = new ViewModel();
             ko.applyBindings(vm);
             console.log("ok");
+             document.getElementById("search").focus();
 
             function buildBlob() {
              //   var blobContent = "#EXTM3U\nD:\\{MBVlabel=CDA}\\Air\\Premiers Symptomes\\01-Modular Mix.wav"

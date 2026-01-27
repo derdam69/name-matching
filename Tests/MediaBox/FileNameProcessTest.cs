@@ -127,11 +127,14 @@ public class FileNameProcessTest
 
         Assert.True(System.IO.File.Exists(outputFile), $"Output file {outputFile} was not created");
         var catalog = files.Where(f=>f.File.Contains("\\{MB")).Select(s => new 
-        {
-            Label = EvaluateMediaBoxPath(s.File).Replace("\\"," • "), 
-            Search = RemoveDiacritics((s.File).ToLower()), 
-            Path = s.File, 
-            Folder = Path.GetDirectoryName(s.File)}
+            {
+                Label = EvaluateMediaBoxPath(s.File).Replace("\\"," • "), 
+                Search = RemoveDiacritics((s.File).ToLower()), 
+                Path = s.File, 
+                Folder = Path.GetDirectoryName(s.File),
+                ItemType = ItemType(s.File)
+                
+            }
         )
         .OrderBy(o => o.Label);
         
@@ -141,6 +144,11 @@ public class FileNameProcessTest
             var catalog = {catalogJson}
         ";
         System.IO.File.WriteAllText(@"c:\temp\Catalog\mb-catalog.js", catalogTemplate);
+    }
+
+    public string ItemType(string path)
+    {
+        return "file";
     }
 
     public string RemoveDiacritics(string text) 
