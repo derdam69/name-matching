@@ -1,0 +1,84 @@
+:host {
+
+  /* named palette colors */
+  --color-blue-sapphire: #0f53bc;
+  --color-blue-fog-of-war: #0e2236;
+  --color-falu-red: #831914;
+  --color-rembrandt-ruby: #974d46;
+  --color-dark-side-of-the-moon: #070c0b;
+  --color-vampire-black: #070707;
+
+
+  /* 60-30-10 rule selection */
+  --color-primary: var(--color-vampire-black);
+  /*var(--color-dark-side-of-the-moon); */
+  --color-primary_: var(--color-dark-side-of-the-moon);
+  --color-secondary: rgba(245, 245, 245, 0.845);
+  --color-secondary-muted: color-mix(in oklab, var(--color-secondary), black 30%);
+  --color-accent: var(--color-blue-sapphire);
+  --color-accent-muted: color-mix(in oklab, var(--color-accent), black 30%);
+  --color-primary-b4: color-mix(in oklab, var(--color-primary), white 30%);
+  --color-primary-b3: color-mix(in oklab, var(--color-primary), white 15%);
+  --color-primary-b2: color-mix(in oklab, var(--color-primary), white 10%);
+  --color-primary-b1: color-mix(in oklab, var(--color-primary), white 5%);
+
+  /* named usage colors */
+  --color-text: var(--color-secondary);
+  --color-text-muted: var(--color-secondary-muted);
+  --color-border: var(--color-primary-b3);
+  --color-hover: var(--color-primary-b2);
+  --color-bg: var(--color-primary);
+  --color-bg-muted: var(--color-primary-b2);
+  --color-border-bright: var(--color-primary-b4);
+
+  background-color: var(--color-bg);
+}
+
+.main-container {
+  background-color: var(--color-bg);
+
+  color: var(--color-text-muted);
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-primary-b1);
+  padding: 10px 0;
+  text-align: center;
+  z-index: 1000;
+  height: 40px;
+}
+
+input {
+  background-color: var(--color-bg-muted);
+  border: 2px solid var(--color-border-bright);
+  border-radius: 20px;
+  outline: none;
+  color: var(--color-text-muted);
+  padding: 10px;
+
+}
+
+.sc {
+  background-color: black;
+  width: 100%;
+  height: calc(100vh - 60px);
+}
+
+.example-item {
+  height: 25px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.example-item:hover {
+  background-color: darkslategrey;
+}
+
