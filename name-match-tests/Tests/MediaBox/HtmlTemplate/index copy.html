@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <title>Browse list</title>
+        <style>
+
+
+            :root {
+                --color-bg: #181818;
+                --color-bg-secondary: #232323;
+                --color-text-primary: #f5f5f5;
+                --color-text-primary-muted: #717171;
+                --color-accent: #0083d4;
+                --color-accent-muted: #0e89d54b;
+                --color-border: #333;
+                --color-border-bright: #393939;
+                --color-hover: #322d2d;
+                --color-error: #e57373;
+                --color-success: #81c784;
+            }
+
+
+            .text-muted {
+                color: var(--color-text-primary-muted)
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: var(--color-bg);
+                color: var(--color-text-primary);
+                margin: 0;
+            }
+            .header {
+                position: sticky;
+                top: 0;
+                background-color: var(--color-bg-secondary);
+                padding: 10px 0;
+                text-align: center;
+                z-index: 1000;
+            }
+            .content {
+                height: auto;
+                padding: 20px;
+            }
+
+            input{
+                background-color: var(--color-bg-secondary);
+                border: 2px solid var(--color-border-bright);
+                border-radius: 20px;
+                outline: none;
+                color: var(--color-text-muted);
+                padding: 10px;
+                
+            }
+
+            .search-input {
+                width: 30%;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            .folderIcon {
+                cursor: pointer;
+                min-width: 16px;
+                max-width: 16px;
+            }
+
+            #open-folder {
+                cursor: pointer;
+            }
+
+            #open-folder .folder-default {
+                display: inline;
+            }
+
+            #open-folder .folder-hover {
+                display: none;
+            }
+
+            #open-folder:hover .folder-default {
+                display: none;
+            }
+
+            #open-folder:hover .folder-hover {
+                display: inline;
+            }
+
+            #play-folder {
+                cursor: pointer;
+            }
+
+            #play-folder .folder-default {
+                display: inline;
+            }
+
+            #play-folder .folder-hover {
+                display: none;
+            }
+
+            #play-folder:hover .folder-default {
+                display: none;
+            }
+
+            #play-folder:hover .folder-hover {
+                display: inline;
+            }
+
+            #enqueue-folder {
+                cursor: pointer;
+            }
+
+            #enqueue-folder .folder-default {
+                display: inline;
+            }
+
+            #enqueue-folder .folder-hover {
+                display: none;
+            }
+
+            #enqueue-folder:hover .folder-default {
+                display: none;
+            }
+
+            #enqueue-folder:hover .folder-hover {
+                display: inline;
+            }
+
+            #play-file {
+                cursor: pointer;
+            }
+
+            #play-file .file-default {
+                display: inline;
+            }
+
+            #play-file .file-hover {
+                display: none;
+            }
+
+            #play-file:hover .file-default {
+                display: none;
+            }
+
+            #play-file:hover .file-hover {
+                display: inline;
+            }
+
+            #enqueue-file {
+                cursor: pointer;
+            }
+
+            #enqueue-file .file-default {
+                display: inline;
+                margin-left: -4px;
+            }
+
+            #enqueue-file .file-hover {
+                display: none;
+            }
+
+            #enqueue-file:hover .file-default {
+                display: none;
+            }
+
+            #enqueue-file:hover .file-hover {
+                display: inline;
+                margin-left: -4px;
+            }
+
+             .list-item {
+                color: var(--color-accent);
+                display: flex;
+                flex-direction: row;
+            }
+
+            .item-row {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .item-row :hover {
+                background-color: var(--color-hover);
+            }
+
+            .toolbar-container {
+                min-width: 128px;
+                max-width: 128px;
+                min-height: 22px;
+                max-height: 22px;
+            }
+
+            .tools {
+                display: none; 
+            }
+
+            /* Show .tools when hovering over .item-row */
+            .list-item:hover .tools {
+                display: block;
+                min-height: 22px;
+                max-height: 22px;
+                padding-left: 4px;
+            }
+
+        </style>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <H2>Browse list</H2>
+            <input class="search-input" type="text" spellcheck="false" data-bind="textInput: filter" placeholder="Search"/>
+            <span class="text-muted">&nbsp;items in list: <span data-bind="text: filteredCatalog().length"></span></span>
+        </div>
+        <div class="content">
+         
+            <div data-bind="foreach: filteredCatalog" class="item-row">
+                <div class="list-item">
+                    <span class="toolbar-container">
+                        <div class="tools">
+                            <span id="open-folder" title="Open location" data-bind="click: function() { explore($data) }"><img class="folder-default" src=".//assets/folder-mono.svg"/><img class="folder-hover" src=".//assets/folder.svg"/></span>
+                            <span id="play-folder" title="Play folder" data-bind="click: function() { playFolder($data) }"><img class="folder-default" src=".//assets/folder-play-mono.svg"/><img class="folder-hover" src=".//assets/folder-play.svg"/></span>
+                            <span id="enqueue-folder" title="Enqueue folder" data-bind="click: function() { enqueueFolder($data) }"><img class="folder-default" src=".//assets/folder-plus-mono.svg"/><img class="folder-hover" src=".//assets/folder-plus.svg"/></span>
+                            <span id="play-file" title="Play file" data-bind="click: function() { playFile($data) }"><img class="file-default" src=".//assets/play-mono.svg"/><img class="file-hover" src=".//assets/play.svg"/></span>
+                            <span id="enqueue-file" title="Enqueue file" data-bind="click: function() { enqueueFile($data) }"><img class="file-default" src=".//assets/enqueue-mono.svg"/><img class="file-hover" src=".//assets/enqueue.svg"/></span>
+                        </div>
+                    </span>
+                    <a class="list-item" data-bind="attr: { href: Path }"><span data-bind="text: Label"></span></a>
+                </div>
+            </div>
+        </div>
+
+         <!-- <button onclick="search()">Search</button> -->
+        <!-- <a data-bind="attr: {href: buildBlob()}"  download="testblob.bat">link</a> -->
+        <p></p>
+
+           
+       <!--
+        <div data-bind="foreach: filteredCatalog">
+            <div>
+                <span id="open-folder" title="Open location" data-bind="click: function() { explore($data) }"><img class="folder-default" src=".//assets/folder-mono.svg"/><img class="folder-hover" src=".//assets/folder.svg"/></span>
+                <span id="play-folder" title="Play folder" data-bind="click: function() { playFolder($data) }"><img class="folder-default" src=".//assets/folder-play-mono.svg"/><img class="folder-hover" src=".//assets/folder-play.svg"/></span>
+                <span id="enqueue-folder" title="Enqueue folder" data-bind="click: function() { enqueueFolder($data) }"><img class="folder-default" src=".//assets/folder-plus-mono.svg"/><img class="folder-hover" src=".//assets/folder-plus.svg"/></span>
+                <span id="play-file" title="Play file" data-bind="click: function() { playFile($data) }"><img class="file-default" src=".//assets/play-mono.svg"/><img class="file-hover" src=".//assets/play.svg"/></span>
+                <span id="enqueue-file" title="Enqueue file" data-bind="click: function() { enqueueFile($data) }"><img class="file-default" src=".//assets/enqueue-mono.svg"/><img class="file-hover" src=".//assets/enqueue.svg"/></span>
+                <a class="list-item" data-bind="attr: { href: Path }"><span data-bind="text: Label"></span></a>
+            </div>
+        </div>
+         -->
+        <script src="./mb-catalog.js"></script> <!-- should contain var catalog = [{name:"alpha", ...}] -->
+
+        <script>
+
+            const ViewModel = function() {
+                const self = this;
+                this.filter = ko.observable("");
+                this.setFilter =  ko.computed(this.filter).extend({rateLimit: {timeout:600, method:  "notifyWhenChangesStop"}});
+
+                this.filteredCatalog = ko.computed(function () {
+                    const f = toNormalForm(self.setFilter()).toLowerCase();
+                    if (!f) {
+                        return []; //catalog;
+                    } else {
+                        const inputs = f.split(" ");
+                        return ko.utils.arrayFilter(catalog, function (item) {
+                            return self.matchAllInputs(item.Search, inputs);
+                        });
+                    }
+                });
+
+                this.matchAllInputs = function(item, inputs) {
+                    if (inputs.length === 1) {
+                        return item.indexOf(inputs[0]) > -1;
+                    }
+                    let i = inputs.length;
+                    while (item.indexOf(inputs[i-1]) > -1) {
+                      i--;
+                    }
+                    return i === 0;
+                }
+            };
+
+            function toNormalForm(str) {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            }
+
+            function explore(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "EXPLORE",
+                    Payload: data.Folder,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
+            }
+
+            function playFolder(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "PLAY",
+                    Payload: data.Folder,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
+            }
+
+            function playFile(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "PLAY",
+                    Payload: data.Path,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
+            }
+
+            function enqueueFolder(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "ENQUEUE",
+                    Payload: data.Folder,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
+            }
+
+            function enqueueFile(data) {
+                var cmd = {
+                    ClipWatchEventId: Date.now(),
+                    Command: "ENQUEUE",
+                    Payload: data.Path,
+                }
+                navigator.clipboard.writeText(JSON.stringify(cmd));
+            }
+
+            var vm = new ViewModel();
+            ko.applyBindings(vm);
+            console.log("ok");
+
+            function buildBlob() {
+             //   var blobContent = "#EXTM3U\nD:\\{MBVlabel=CDA}\\Air\\Premiers Symptomes\\01-Modular Mix.wav"
+                var blobContent = 'explorer.exe "D:\\{MBVlabel=CDA}\\Air\\Premiers Symptomes\\"'
+
+                var blob = new Blob([blobContent]);
+                blob.type = "text/plain";
+                return URL.createObjectURL(blob);
+            }
+
+        </script>
+    </body>
+
+</html>

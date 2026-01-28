@@ -1,0 +1,32 @@
+<!--
+<pre>
+  {{data | json}}
+</pre>
+<br/>
+
+<br/>
+-->
+
+<div class="main-container">
+
+  <div class="header">
+   <!-- Items in filtered data: {{filteredIitems().length}} -->
+      <input #searchQuery type="text"  class="search-input" placeholder="Search collection" spellcheck="false" (input)="onSearchUpdated(searchQuery.value)" />
+  </div>
+
+  <cdk-virtual-scroll-viewport id="scroll-viewport" class="sc"  itemSize="25"   minBufferPx="2000" maxBufferPx="4000">
+    <div *cdkVirtualFor="let item of filteredIitems()" class="example-item">
+      {{item.Label}}
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>
+<!--
+
+@for (i of data; track i) {
+  <div class="example-item"> {{i.path}}</div>
+}
+-->
+
+
+
+

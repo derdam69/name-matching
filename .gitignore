@@ -1,41 +1,5 @@
-# From .NET Core 3.0+ you can use the command: `dotnet new gitignore` to generate a customizable .gitignore file.
-# The GitHub template for Visual Studio (which covers .NET projects) is a good starting point.
-
-# Build results
-[Dd]ebug/
-[Rr]elease/
-[Bb]in/
-[Oo]bj/
-[Tt]estResults/
-*.log
-*.pfx
-*.cer
-*.snk
-[Tt]emp/
-[Ll]ogs/
-
-# Visual Studio files
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-.vs/                  # Ignore the .vs folder for Visual Studio 2017 and newer
-
-# NuGet packages
-.nuget/
-packages/
-*.nupkg
-project.lock.json     # Deprecated in favor of project.assets.json, but good to include
-
-# Rider
-.idea/
-
-# VS Code
-.vscode/              # Ignored by default in the official template, but can be useful to commit some settings (e.g. launch.json)
-
-# Other
-*.DS_Store            # Mac system files
-Thumbs.db             # Windows system files
-
-# Azure Function App
-local.settings.json   # Contains sensitive local settings
+﻿MediaStore/src/MediaStoreApi/bin
+MediaStore/src/MediaStoreApi/bin
+MediaStore/src/MediaStoreApi/obj
+MediaStore/src/MediaStoreApi/obj
+MediaStore/src/MediaStoreApi/obj

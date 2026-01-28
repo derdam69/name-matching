@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Header Example</title>
+    <style>
+        :root {
+        /* named palette colors */
+        --color-blue-sapphire: #0f53bc;
+        --color-blue-fog-of-war: #0e2236;
+        --color-falu-red: #831914;
+        --color-rembrandt-ruby: #974d46;
+        --color-dark-side-of-the-moon: #070c0b;
+        --color-vampire-black: #070707;
+
+        /* 60-30-10 rule selection */
+        --color-primary: var(--color-vampire-black);  /*var(--color-dark-side-of-the-moon); */
+        --color-primary_: var(--color-dark-side-of-the-moon);
+        --color-secondary: whitesmoke;
+        --color-secondary-muted: color-mix(in oklab, var(--color-secondary), black 30%);
+        --color-accent: var(--color-blue-sapphire);
+        --color-accent-muted:  color-mix(in oklab, var(--color-accent), black 30%);
+        --color-primary-muted: color-mix(in oklab, var(--color-primary), white 20%);
+        --color-primary-muted-10: color-mix(in oklab, var(--color-primary), white 10%);
+
+
+        /* named usage colors */
+        --color-text: var(--color-secondary);
+        --color-border: var(--color-primary-muted);
+        --color-hover: var(--color-primary-muted-10);
+        --color-bg: var(--color-primary);
+        --color-bg-muted: var(--color-primary-muted-10);
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            z-index: 1000;
+        }
+        .content {
+            height: 2000px; /* For demonstration purposes */
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Sticky Header</h1>
+    </div>
+
+    <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+
+</body>
+</html>

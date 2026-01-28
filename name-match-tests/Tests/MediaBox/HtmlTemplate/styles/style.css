@@ -1,0 +1,274 @@
+    :root {
+
+        /* named palette colors */
+        --color-blue-sapphire: #0f53bc;
+        --color-blue-fog-of-war: #0e2236;
+        --color-falu-red: #831914;
+        --color-rembrandt-ruby: #974d46;
+        --color-dark-side-of-the-moon: #070c0b;
+        --color-vampire-black: #070707;
+
+
+        /* 60-30-10 rule selection */
+        --color-primary: var(--color-vampire-black);
+        /*var(--color-dark-side-of-the-moon); */
+        --color-primary_: var(--color-dark-side-of-the-moon);
+        --color-secondary: rgba(245, 245, 245, 0.845);
+        --color-secondary-muted: color-mix(in oklab, var(--color-secondary), black 30%);
+        --color-accent: var(--color-blue-sapphire);
+        --color-accent-muted: color-mix(in oklab, var(--color-accent), black 30%);
+        --color-primary-b4: color-mix(in oklab, var(--color-primary), white 30%);
+        --color-primary-b3: color-mix(in oklab, var(--color-primary), white 15%);
+        --color-primary-b2: color-mix(in oklab, var(--color-primary), white 10%);
+        --color-primary-b1: color-mix(in oklab, var(--color-primary), white 5%);
+
+        /* named usage colors */
+        --color-text: var(--color-secondary);
+        --color-text-muted: var(--color-secondary-muted-10);
+        --color-border: var(--color-primary-b3);
+        --color-hover: var(--color-primary-b2);
+        --color-bg: var(--color-primary);
+        --color-bg-muted: var(--color-primary-b2);
+        --color-border-bright: var(--color-primary-b4);
+    }
+
+
+    .text-muted {
+        color: var(--color-text-muted)
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        margin: 0;
+    }
+
+    .header {
+        position: sticky;
+        top: 0;
+        background-color: var(--color-primary-b1);
+        padding: 10px 0;
+        text-align: center;
+        z-index: 1000;
+    }
+
+    .content {
+        height: auto;
+        padding: 20px;
+    }
+
+    input {
+        background-color: var(--color-bg-muted);
+        border: 2px solid var(--color-border-bright);
+        border-radius: 20px;
+        outline: none;
+        color: var(--color-text-muted);
+        padding: 10px;
+
+    }
+
+    .search-input {
+        width: 30%;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .folderIcon {
+        cursor: pointer;
+        min-width: 16px;
+        max-width: 16px;
+    }
+
+    #open-folder {
+        cursor: pointer;
+    }
+
+    #open-folder .folder-default {
+        display: inline;
+    }
+
+    #open-folder .folder-hover {
+        display: none;
+    }
+
+    #open-folder:hover .folder-default {
+        display: none;
+    }
+
+    #open-folder:hover .folder-hover {
+        display: inline;
+    }
+
+    #play-folder {
+        cursor: pointer;
+    }
+
+    #play-folder .folder-default {
+        display: inline;
+    }
+
+    #play-folder .folder-hover {
+        display: none;
+    }
+
+    #play-folder:hover .folder-default {
+        display: none;
+    }
+
+    #play-folder:hover .folder-hover {
+        display: inline;
+    }
+
+    #enqueue-folder {
+        cursor: pointer;
+    }
+
+    #enqueue-folder .folder-default {
+        display: inline;
+    }
+
+    #enqueue-folder .folder-hover {
+        display: none;
+    }
+
+    #enqueue-folder:hover .folder-default {
+        display: none;
+    }
+
+    #enqueue-folder:hover .folder-hover {
+        display: inline;
+    }
+
+    #play-file {
+        cursor: pointer;
+    }
+
+    #play-file .file-default {
+        display: inline;
+    }
+
+    #play-file .file-hover {
+        display: none;
+    }
+
+    #play-file:hover .file-default {
+        display: none;
+    }
+
+    #play-file:hover .file-hover {
+        display: inline;
+    }
+
+    #enqueue-file {
+        cursor: pointer;
+    }
+
+    #enqueue-file .file-default {
+        display: inline;
+        margin-left: -4px;
+    }
+
+    #enqueue-file .file-hover {
+        display: none;
+    }
+
+    #enqueue-file:hover .file-default {
+        display: none;
+    }
+
+    #enqueue-file:hover .file-hover {
+        display: inline;
+        margin-left: -4px;
+    }
+
+    .list-item {
+        color: var(--color-accent);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .item-row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .item-row :hover {
+        background-color: var(--color-hover);
+    }
+
+    .toolbar-container {
+        min-width: 128px;
+        max-width: 128px;
+        min-height: 22px;
+        max-height: 22px;
+    }
+
+    .tools {
+        display: none;
+    }
+
+    /* Show .tools when hovering over .item-row */
+    .list-item:hover .tools {
+        display: block;
+        min-height: 22px;
+        max-height: 22px;
+        padding-left: 4px;
+    }
+
+    .media-type:hover {
+        display: none;
+
+    }
+
+
+    .slide-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        width: 48px;
+        height: 20px;
+        /* Remove vertical-align: middle; */
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--color-bg-muted);
+        border: 2px solid var(--color-border);
+        border-radius: 28px;
+        transition: background 0.2s, border 0.2s;
+
+        /* Ensure the slider fills the parent */
+        width: 100%;
+        height: 100%;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: var(--color-accent-muted);
+        border-radius: 50%;
+        transition: transform 0.2s, background 0.2s;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(24px) translateY(-50%);
+        background-color: var(--color-accent);
+    }
