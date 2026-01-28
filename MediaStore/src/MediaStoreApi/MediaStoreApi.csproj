@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.19" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\NewFolder\" />
+  </ItemGroup>
+
+ <!-- Add this Target to copy the directory after the build completes -->
+  <Target Name="CopyWwwRootToOutput" AfterTargets="Build">
+    <Message Text="Copying wwwroot folder to output directory..." Importance="high" />
+    <!-- Copies the entire wwwroot directory content to the target output path -->
+    <Exec Command="xcopy /s /y /i &quot;$(ProjectDir)wwwroot&quot; &quot;$(TargetDir)wwwroot&quot;" Condition="'$(OS)' == 'Windows_NT'" />
+    <Exec Command="cp -r &quot;$(ProjectDir)wwwroot&quot; &quot;$(TargetDir)wwwroot&quot;" Condition="'$(OS)' != 'Windows_NT'" />
+  </Target>
+
+</Project>
