@@ -11,15 +11,10 @@
 
   <div class="header">
    <!-- Items in filtered data: {{filteredIitems().length}} -->
-
-    <label>
-      Search:
-      <input #searchQuery type="text" (input)="onSearchUpdated(searchQuery.value)" />
-    </label>
+      <input #searchQuery type="text"  class="search-input" placeholder="Search collection" spellcheck="false" (input)="onSearchUpdated(searchQuery.value)" />
   </div>
 
   <cdk-virtual-scroll-viewport id="scroll-viewport" class="sc"  itemSize="25"   minBufferPx="2000" maxBufferPx="4000">
-
     <div *cdkVirtualFor="let item of filteredIitems()" class="example-item">
       {{item.Label}}
     </div>
