@@ -44,7 +44,7 @@ namespace name_match.Helpers
                       ,QueryHelper.MatchNameSelectorFuzzy(toFind)
                       ,QueryHelper.MatchNameSelector(toFind)
                     )
-                    .Name("Pretoken loose")
+                 .Name("Pretoken loose")
             );
         }
 
