@@ -1,0 +1,1722 @@
+{
+  "Version": 1,
+  "Hash": "k66seuDcJr4vfi2nL+ARpz3saj7Ya+8swf3tbMLmTO0=",
+  "Source": "MediaStoreApi",
+  "BasePath": "_content/MediaStoreApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MediaStoreApi\\wwwroot",
+      "Source": "MediaStoreApi",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\",
+      "BasePath": "_content/MediaStoreApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\1mkvpv020l-275iwiorcr.gz",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "main-XU7YYICO#[.{fingerprint=275iwiorcr}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\main-XU7YYICO.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "9righ1yyk5",
+      "Integrity": "9beWpZYz5M4Ro/oG7qTOSvLWR1g3IIV3hAmyItSkRvA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\main-XU7YYICO.js"
+    },
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\6vkkdcg4ch-01qolwpovq.gz",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "index#[.{fingerprint=01qolwpovq}]?.html.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\index.html",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "xvara769c1",
+      "Integrity": "IyoXmCmd4A7eYpBKP9sjH1eC1042vXhYL1Slke5R+/4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\hjfk4ykb7x-0pl8khvgzt.gz",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "mb-catalog#[.{fingerprint=0pl8khvgzt}]?.json.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\mb-catalog.json",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "fwrblr7ldk",
+      "Integrity": "AW0cTlG3QyOde/SRHvJx5Wxdmnr2swKUS0reVHFp4ps=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\mb-catalog.json"
+    },
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\isr6y0xwnc-vagikyz9qx.gz",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "favicon#[.{fingerprint=vagikyz9qx}]?.ico.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\favicon.ico",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "spc2whqxhc",
+      "Integrity": "4JD5TBkaKkYJVw5DzZh1jKJdCSTQYxpre7fdXrSQ/P8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\ldfq31l3gu-fnlla9mlmo.gz",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "styles-L2QTJGMB#[.{fingerprint=fnlla9mlmo}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\styles-L2QTJGMB.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "guezkde2mw",
+      "Integrity": "6H1ZK/+JcvgqSqtzfgLWMhJDtF48iTLrEe2AsPegawU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\styles-L2QTJGMB.css"
+    },
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\favicon.ico",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "favicon#[.{fingerprint}]?.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "vagikyz9qx",
+      "Integrity": "+RAr6AKXwFKSB2B75Sd7T5C8qJ1lmI+hdxuRx4lOgV8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\index.html",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "index#[.{fingerprint}]?.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "01qolwpovq",
+      "Integrity": "PCEaIh3OY3rNsdNKJQxZkNiGK6wsMzKex0zcY5X6Qs8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\main-XU7YYICO.js",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "main-XU7YYICO#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "275iwiorcr",
+      "Integrity": "ztISWBSZ7E5GrVZOfxn6lHW2jFaMtwKmYJA1oJSOyfw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\main-XU7YYICO.js"
+    },
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\mb-catalog.json",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "mb-catalog#[.{fingerprint}]?.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0pl8khvgzt",
+      "Integrity": "1IeJx1wODGw8ogiuNYbBAcs0j4slsgM6Qhs9/fQ+Wvg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\mb-catalog.json"
+    },
+    {
+      "Identity": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\styles-L2QTJGMB.css",
+      "SourceId": "MediaStoreApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\",
+      "BasePath": "_content/MediaStoreApi",
+      "RelativePath": "styles-L2QTJGMB#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fnlla9mlmo",
+      "Integrity": "JfFTeRteyGift0HcQ6RZY1JlltBHgg2thR7/ovKU73E=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\styles-L2QTJGMB.css"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "favicon.ico",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\isr6y0xwnc-vagikyz9qx.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000237360551"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4212"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4JD5TBkaKkYJVw5DzZh1jKJdCSTQYxpre7fdXrSQ/P8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 Jan 2026 20:42:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"+RAr6AKXwFKSB2B75Sd7T5C8qJ1lmI+hdxuRx4lOgV8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+RAr6AKXwFKSB2B75Sd7T5C8qJ1lmI+hdxuRx4lOgV8="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.ico",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\favicon.ico",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15086"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+RAr6AKXwFKSB2B75Sd7T5C8qJ1lmI+hdxuRx4lOgV8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 Jan 2026 20:42:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+RAr6AKXwFKSB2B75Sd7T5C8qJ1lmI+hdxuRx4lOgV8="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.ico.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\isr6y0xwnc-vagikyz9qx.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4212"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4JD5TBkaKkYJVw5DzZh1jKJdCSTQYxpre7fdXrSQ/P8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 Jan 2026 20:42:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4JD5TBkaKkYJVw5DzZh1jKJdCSTQYxpre7fdXrSQ/P8="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.vagikyz9qx.ico",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\isr6y0xwnc-vagikyz9qx.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000237360551"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4212"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4JD5TBkaKkYJVw5DzZh1jKJdCSTQYxpre7fdXrSQ/P8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 Jan 2026 20:42:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"+RAr6AKXwFKSB2B75Sd7T5C8qJ1lmI+hdxuRx4lOgV8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vagikyz9qx"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.ico"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+RAr6AKXwFKSB2B75Sd7T5C8qJ1lmI+hdxuRx4lOgV8="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.vagikyz9qx.ico",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\favicon.ico",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15086"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+RAr6AKXwFKSB2B75Sd7T5C8qJ1lmI+hdxuRx4lOgV8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 Jan 2026 20:42:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vagikyz9qx"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.ico"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+RAr6AKXwFKSB2B75Sd7T5C8qJ1lmI+hdxuRx4lOgV8="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.vagikyz9qx.ico.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\isr6y0xwnc-vagikyz9qx.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4212"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4JD5TBkaKkYJVw5DzZh1jKJdCSTQYxpre7fdXrSQ/P8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 26 Jan 2026 20:42:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vagikyz9qx"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.ico.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4JD5TBkaKkYJVw5DzZh1jKJdCSTQYxpre7fdXrSQ/P8="
+        }
+      ]
+    },
+    {
+      "Route": "index.01qolwpovq.html",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\6vkkdcg4ch-01qolwpovq.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000257864879"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3877"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IyoXmCmd4A7eYpBKP9sjH1eC1042vXhYL1Slke5R+/4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"PCEaIh3OY3rNsdNKJQxZkNiGK6wsMzKex0zcY5X6Qs8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "01qolwpovq"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCEaIh3OY3rNsdNKJQxZkNiGK6wsMzKex0zcY5X6Qs8="
+        }
+      ]
+    },
+    {
+      "Route": "index.01qolwpovq.html",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24695"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCEaIh3OY3rNsdNKJQxZkNiGK6wsMzKex0zcY5X6Qs8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "01qolwpovq"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCEaIh3OY3rNsdNKJQxZkNiGK6wsMzKex0zcY5X6Qs8="
+        }
+      ]
+    },
+    {
+      "Route": "index.01qolwpovq.html.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\6vkkdcg4ch-01qolwpovq.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3877"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IyoXmCmd4A7eYpBKP9sjH1eC1042vXhYL1Slke5R+/4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "01qolwpovq"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IyoXmCmd4A7eYpBKP9sjH1eC1042vXhYL1Slke5R+/4="
+        }
+      ]
+    },
+    {
+      "Route": "index.html",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\6vkkdcg4ch-01qolwpovq.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000257864879"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3877"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IyoXmCmd4A7eYpBKP9sjH1eC1042vXhYL1Slke5R+/4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"PCEaIh3OY3rNsdNKJQxZkNiGK6wsMzKex0zcY5X6Qs8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCEaIh3OY3rNsdNKJQxZkNiGK6wsMzKex0zcY5X6Qs8="
+        }
+      ]
+    },
+    {
+      "Route": "index.html",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24695"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCEaIh3OY3rNsdNKJQxZkNiGK6wsMzKex0zcY5X6Qs8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCEaIh3OY3rNsdNKJQxZkNiGK6wsMzKex0zcY5X6Qs8="
+        }
+      ]
+    },
+    {
+      "Route": "index.html.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\6vkkdcg4ch-01qolwpovq.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3877"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IyoXmCmd4A7eYpBKP9sjH1eC1042vXhYL1Slke5R+/4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IyoXmCmd4A7eYpBKP9sjH1eC1042vXhYL1Slke5R+/4="
+        }
+      ]
+    },
+    {
+      "Route": "main-XU7YYICO.275iwiorcr.js",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\1mkvpv020l-275iwiorcr.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000012050371"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "82984"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9beWpZYz5M4Ro/oG7qTOSvLWR1g3IIV3hAmyItSkRvA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"ztISWBSZ7E5GrVZOfxn6lHW2jFaMtwKmYJA1oJSOyfw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "275iwiorcr"
+        },
+        {
+          "Name": "label",
+          "Value": "main-XU7YYICO.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ztISWBSZ7E5GrVZOfxn6lHW2jFaMtwKmYJA1oJSOyfw="
+        }
+      ]
+    },
+    {
+      "Route": "main-XU7YYICO.275iwiorcr.js",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\main-XU7YYICO.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "273152"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ztISWBSZ7E5GrVZOfxn6lHW2jFaMtwKmYJA1oJSOyfw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "275iwiorcr"
+        },
+        {
+          "Name": "label",
+          "Value": "main-XU7YYICO.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ztISWBSZ7E5GrVZOfxn6lHW2jFaMtwKmYJA1oJSOyfw="
+        }
+      ]
+    },
+    {
+      "Route": "main-XU7YYICO.275iwiorcr.js.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\1mkvpv020l-275iwiorcr.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "82984"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9beWpZYz5M4Ro/oG7qTOSvLWR1g3IIV3hAmyItSkRvA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "275iwiorcr"
+        },
+        {
+          "Name": "label",
+          "Value": "main-XU7YYICO.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9beWpZYz5M4Ro/oG7qTOSvLWR1g3IIV3hAmyItSkRvA="
+        }
+      ]
+    },
+    {
+      "Route": "main-XU7YYICO.js",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\1mkvpv020l-275iwiorcr.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000012050371"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "82984"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9beWpZYz5M4Ro/oG7qTOSvLWR1g3IIV3hAmyItSkRvA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"ztISWBSZ7E5GrVZOfxn6lHW2jFaMtwKmYJA1oJSOyfw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ztISWBSZ7E5GrVZOfxn6lHW2jFaMtwKmYJA1oJSOyfw="
+        }
+      ]
+    },
+    {
+      "Route": "main-XU7YYICO.js",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\main-XU7YYICO.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "273152"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ztISWBSZ7E5GrVZOfxn6lHW2jFaMtwKmYJA1oJSOyfw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ztISWBSZ7E5GrVZOfxn6lHW2jFaMtwKmYJA1oJSOyfw="
+        }
+      ]
+    },
+    {
+      "Route": "main-XU7YYICO.js.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\1mkvpv020l-275iwiorcr.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "82984"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9beWpZYz5M4Ro/oG7qTOSvLWR1g3IIV3hAmyItSkRvA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9beWpZYz5M4Ro/oG7qTOSvLWR1g3IIV3hAmyItSkRvA="
+        }
+      ]
+    },
+    {
+      "Route": "mb-catalog.0pl8khvgzt.json",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\hjfk4ykb7x-0pl8khvgzt.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000001245937"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "802608"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AW0cTlG3QyOde/SRHvJx5Wxdmnr2swKUS0reVHFp4ps=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 Jan 2026 18:52:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"1IeJx1wODGw8ogiuNYbBAcs0j4slsgM6Qhs9/fQ+Wvg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0pl8khvgzt"
+        },
+        {
+          "Name": "label",
+          "Value": "mb-catalog.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1IeJx1wODGw8ogiuNYbBAcs0j4slsgM6Qhs9/fQ+Wvg="
+        }
+      ]
+    },
+    {
+      "Route": "mb-catalog.0pl8khvgzt.json",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\mb-catalog.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10318537"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1IeJx1wODGw8ogiuNYbBAcs0j4slsgM6Qhs9/fQ+Wvg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 Jan 2026 18:52:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0pl8khvgzt"
+        },
+        {
+          "Name": "label",
+          "Value": "mb-catalog.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1IeJx1wODGw8ogiuNYbBAcs0j4slsgM6Qhs9/fQ+Wvg="
+        }
+      ]
+    },
+    {
+      "Route": "mb-catalog.0pl8khvgzt.json.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\hjfk4ykb7x-0pl8khvgzt.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "802608"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AW0cTlG3QyOde/SRHvJx5Wxdmnr2swKUS0reVHFp4ps=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 Jan 2026 18:52:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0pl8khvgzt"
+        },
+        {
+          "Name": "label",
+          "Value": "mb-catalog.json.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AW0cTlG3QyOde/SRHvJx5Wxdmnr2swKUS0reVHFp4ps="
+        }
+      ]
+    },
+    {
+      "Route": "mb-catalog.json",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\hjfk4ykb7x-0pl8khvgzt.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000001245937"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "802608"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AW0cTlG3QyOde/SRHvJx5Wxdmnr2swKUS0reVHFp4ps=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 Jan 2026 18:52:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"1IeJx1wODGw8ogiuNYbBAcs0j4slsgM6Qhs9/fQ+Wvg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1IeJx1wODGw8ogiuNYbBAcs0j4slsgM6Qhs9/fQ+Wvg="
+        }
+      ]
+    },
+    {
+      "Route": "mb-catalog.json",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\mb-catalog.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10318537"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1IeJx1wODGw8ogiuNYbBAcs0j4slsgM6Qhs9/fQ+Wvg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 Jan 2026 18:52:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1IeJx1wODGw8ogiuNYbBAcs0j4slsgM6Qhs9/fQ+Wvg="
+        }
+      ]
+    },
+    {
+      "Route": "mb-catalog.json.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\hjfk4ykb7x-0pl8khvgzt.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "802608"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AW0cTlG3QyOde/SRHvJx5Wxdmnr2swKUS0reVHFp4ps=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 27 Jan 2026 18:52:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AW0cTlG3QyOde/SRHvJx5Wxdmnr2swKUS0reVHFp4ps="
+        }
+      ]
+    },
+    {
+      "Route": "styles-L2QTJGMB.css",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\ldfq31l3gu-fnlla9mlmo.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000633713561"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1577"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6H1ZK/+JcvgqSqtzfgLWMhJDtF48iTLrEe2AsPegawU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"JfFTeRteyGift0HcQ6RZY1JlltBHgg2thR7/ovKU73E=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JfFTeRteyGift0HcQ6RZY1JlltBHgg2thR7/ovKU73E="
+        }
+      ]
+    },
+    {
+      "Route": "styles-L2QTJGMB.css",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\styles-L2QTJGMB.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8127"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JfFTeRteyGift0HcQ6RZY1JlltBHgg2thR7/ovKU73E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JfFTeRteyGift0HcQ6RZY1JlltBHgg2thR7/ovKU73E="
+        }
+      ]
+    },
+    {
+      "Route": "styles-L2QTJGMB.css.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\ldfq31l3gu-fnlla9mlmo.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1577"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6H1ZK/+JcvgqSqtzfgLWMhJDtF48iTLrEe2AsPegawU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6H1ZK/+JcvgqSqtzfgLWMhJDtF48iTLrEe2AsPegawU="
+        }
+      ]
+    },
+    {
+      "Route": "styles-L2QTJGMB.fnlla9mlmo.css",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\ldfq31l3gu-fnlla9mlmo.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000633713561"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1577"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6H1ZK/+JcvgqSqtzfgLWMhJDtF48iTLrEe2AsPegawU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"JfFTeRteyGift0HcQ6RZY1JlltBHgg2thR7/ovKU73E=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fnlla9mlmo"
+        },
+        {
+          "Name": "label",
+          "Value": "styles-L2QTJGMB.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JfFTeRteyGift0HcQ6RZY1JlltBHgg2thR7/ovKU73E="
+        }
+      ]
+    },
+    {
+      "Route": "styles-L2QTJGMB.fnlla9mlmo.css",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\wwwroot\\styles-L2QTJGMB.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8127"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JfFTeRteyGift0HcQ6RZY1JlltBHgg2thR7/ovKU73E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fnlla9mlmo"
+        },
+        {
+          "Name": "label",
+          "Value": "styles-L2QTJGMB.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JfFTeRteyGift0HcQ6RZY1JlltBHgg2thR7/ovKU73E="
+        }
+      ]
+    },
+    {
+      "Route": "styles-L2QTJGMB.fnlla9mlmo.css.gz",
+      "AssetFile": "C:\\Users\\damie\\Documents\\Git\\name-matching\\MediaStore\\src\\MediaStoreApi\\obj\\Debug\\net9.0\\compressed\\ldfq31l3gu-fnlla9mlmo.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1577"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6H1ZK/+JcvgqSqtzfgLWMhJDtF48iTLrEe2AsPegawU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 28 Jan 2026 17:56:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fnlla9mlmo"
+        },
+        {
+          "Name": "label",
+          "Value": "styles-L2QTJGMB.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6H1ZK/+JcvgqSqtzfgLWMhJDtF48iTLrEe2AsPegawU="
+        }
+      ]
+    }
+  ]
+}

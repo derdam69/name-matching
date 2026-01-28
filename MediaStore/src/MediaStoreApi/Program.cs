@@ -1,0 +1,33 @@
+
+using MediaStoreApi.Modules.Explore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.RegisterExploreModule();
+
+
+var app = builder.Build();
+
+object f = null;
+
+// Configure the HTTP request pipeline.
+if (true ||app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.MapFallbackToFile("index.html");
+
+app.UseStaticFiles();
+
+app.MapExploreEndpoints();
+
+app.Run();
+
