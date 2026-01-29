@@ -15,10 +15,7 @@ import {API_BASE_URL, Service} from '../../../openapi/openapi';
     MatButtonModule
 
   ],
-  providers: [ {
-    provide: API_BASE_URL,
-    useValue: './mediastore-api'
-  }, Service],
+  providers: [Service],
   templateUrl: './search-catalog.html',
   styleUrl: './search-catalog.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,6 +31,7 @@ export class SearchCatalog implements  OnInit{
   ngOnInit(): void {
    // @ts-ignore
 
+    this.openApi.open('c:\\temp').subscribe()
     this.httpClient.get('mb-catalog.json').subscribe(d =>
     {
 
@@ -42,7 +40,6 @@ export class SearchCatalog implements  OnInit{
       this.data.set(d) ;
     });
 
-    this.openApi.test().subscribe(d => { alert(d)})
 
   }
 
