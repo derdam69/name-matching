@@ -14,6 +14,7 @@ public static class ExploreModule
     {
         endpoints.MapPost("/explore/{path}", PostExplore.Handle);
         endpoints.MapGet("/files/{path}/{matchPattern}", GetFiles.Handle);
+           endpoints.MapGet("/test", () => "OK");
         return endpoints;
     }
 }

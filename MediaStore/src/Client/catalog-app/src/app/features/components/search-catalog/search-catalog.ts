@@ -17,7 +17,7 @@ import {API_BASE_URL, Service} from '../../../openapi/openapi';
   ],
   providers: [ {
     provide: API_BASE_URL,
-    useValue: 'http://localhost:5171'
+    useValue: './mediastore-api'
   }, Service],
   templateUrl: './search-catalog.html',
   styleUrl: './search-catalog.scss',
@@ -42,7 +42,7 @@ export class SearchCatalog implements  OnInit{
       this.data.set(d) ;
     });
 
-    this.openApi.explore("c:\temp").subscribe(d => {})
+    this.openApi.test().subscribe(d => { alert(d)})
 
   }
 

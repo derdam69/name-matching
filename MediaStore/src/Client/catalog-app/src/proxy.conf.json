@@ -1,0 +1,9 @@
+{
+  "/mediastore-api/**": {
+    "target": "http://localhost:5171",
+    "secure": false,
+    "pathRewrite": {
+      "^/mediastore-api": ""
+    }
+  }
+}

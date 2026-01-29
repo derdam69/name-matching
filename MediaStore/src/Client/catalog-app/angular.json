@@ -61,7 +61,8 @@
               "buildTarget": "catalog-app:build:production"
             },
             "development": {
-              "buildTarget": "catalog-app:build:development"
+              "buildTarget": "catalog-app:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
