@@ -3,9 +3,9 @@ import {ChangeDetectionStrategy, Component, computed, OnInit, signal} from '@ang
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { HttpClient } from '@angular/common/http';
-import {JsonPipe, NgOptimizedImage} from '@angular/common';
-import {API_BASE_URL, Service} from '../../../openapi/openapi';
+import {HttpClient } from '@angular/common/http';
+import {NgOptimizedImage} from '@angular/common';
+import {Service} from '../../../openapi/openapi';
 
 @Component({
   selector: 'app-search-catalog',
