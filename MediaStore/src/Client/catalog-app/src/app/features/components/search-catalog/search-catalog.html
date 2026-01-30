@@ -16,9 +16,13 @@
        <!-- {{item.Label}} -->
         <span class="toolbar-container">
             <div class="tools">
-                <span id="open-folder" title="Open location">
+                <span class="open-folder" title="Open location" (click)="openFolder(item)">
                     <img class="folder-default" ngSrc="/assets/folder-mono.svg" height="20" width="20"/>
                     <img class="folder-hover" ngSrc="./assets/folder.svg" height="20" width="20"/>
+                </span>
+                <span class="open-folder" title="Play location">
+                    <img class="folder-default" ngSrc="/assets/folder-play-mono.svg" height="20" width="20"/>
+                    <img class="folder-hover" ngSrc="./assets/folder-play.svg" height="20" width="20"/>
                 </span>
             </div>
         </span>

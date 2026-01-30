@@ -85,23 +85,23 @@ input {
 }
 
 
-#open-folder {
+.open-folder {
   cursor: pointer;
 }
 
-#open-folder .folder-default {
+.open-folder .folder-default {
   display: inline;
 }
 
-#open-folder .folder-hover {
+.open-folder .folder-hover {
   display: none;
 }
 
-#open-folder:hover .folder-default {
+.open-folder:hover .folder-default {
   display: none;
 }
 
-#open-folder:hover .folder-hover {
+.open-folder:hover .folder-hover {
   display: inline;
 }
 

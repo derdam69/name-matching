@@ -28,7 +28,7 @@ export class SearchCatalog implements  OnInit{
   }
 
   ngOnInit(): void {
-    this.openApi.open('c:\\temp').subscribe()
+   // this.openApi.open('c:\\temp').subscribe()
     this.httpClient.get('mb-catalog.json').subscribe(d =>
     {
       this.data.set(d as FileItem[]) ;
@@ -62,6 +62,12 @@ export class SearchCatalog implements  OnInit{
       i--;
     }
     return i === 0;
+  }
+
+  openFolder(item: FileItem) {
+
+    this.openApi.open(item.Path).subscribe((openApi) => {},
+            e => {alert(e)})
   }
 }
 
