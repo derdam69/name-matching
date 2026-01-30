@@ -5,15 +5,17 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClient } from '@angular/common/http';
 import {JsonPipe} from '@angular/common';
+import {API_BASE_URL, Service} from '../../../openapi/openapi';
 
 @Component({
   selector: 'app-search-catalog',
   imports: [
     ScrollingModule,
     MatIconModule,
-    MatButtonModule,
-    JsonPipe,
+    MatButtonModule
+
   ],
+  providers: [Service],
   templateUrl: './search-catalog.html',
   styleUrl: './search-catalog.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,12 +25,13 @@ export class SearchCatalog implements  OnInit{
 
   data = signal< fileItem[]>([]);
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private openApi: Service) {
   }
 
   ngOnInit(): void {
    // @ts-ignore
 
+    this.openApi.open('c:\\temp').subscribe()
     this.httpClient.get('mb-catalog.json').subscribe(d =>
     {
 
@@ -36,6 +39,7 @@ export class SearchCatalog implements  OnInit{
       // @ts-ignore
       this.data.set(d) ;
     });
+
 
   }
 

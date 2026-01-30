@@ -1,0 +1,9 @@
+{
+  "/proxy-mediastore/**": {
+    "target": "http://localhost:5171",
+    "secure": false,
+    "pathRewrite": {
+      "^/proxy-mediastore": ""
+    }
+  }
+}

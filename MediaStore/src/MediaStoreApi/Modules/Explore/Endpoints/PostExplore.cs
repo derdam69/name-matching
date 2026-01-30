@@ -1,6 +1,6 @@
 namespace MediaStoreApi.Modules.Explore.Endpoints;
 
-public static class PostExplore
+public static class PostOpen
 {
     public static  IResult Handle(string path, IExploreService exploreService)
     {
