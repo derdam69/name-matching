@@ -81,6 +81,62 @@ input {
 }
 
 .example-item:hover {
-  background-color: darkslategrey;
+  _background-color: darkslategrey;
+}
+
+
+#open-folder {
+  cursor: pointer;
+}
+
+#open-folder .folder-default {
+  display: inline;
+}
+
+#open-folder .folder-hover {
+  display: none;
+}
+
+#open-folder:hover .folder-default {
+  display: none;
+}
+
+#open-folder:hover .folder-hover {
+  display: inline;
+}
+
+.list-item {
+  color: var(--color-accent);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-row :hover {
+  background-color: var(--color-hover);
+}
+
+.toolbar-container {
+  min-width: 128px;
+  max-width: 128px;
+  min-height: 22px;
+  max-height: 22px;
+}
+
+.tools {
+  display: none;
+}
+
+/* Show .tools when hovering over .item-row */
+.list-item:hover .tools {
+  display: block;
+  min-height: 22px;
+  max-height: 22px;
+  padding-left: 4px;
 }
 

@@ -12,8 +12,17 @@
   </div>
 
   <cdk-virtual-scroll-viewport id="scroll-viewport" class="sc"  itemSize="25"   minBufferPx="2000" maxBufferPx="4000">
-    <div *cdkVirtualFor="let item of filteredIitems()" class="example-item">
-      {{item.Label}}
+    <div *cdkVirtualFor="let item of filteredIitems()" class="example-item list-item">
+       <!-- {{item.Label}} -->
+        <span class="toolbar-container">
+            <div class="tools">
+                <span id="open-folder" title="Open location">
+                    <img class="folder-default" ngSrc="/assets/folder-mono.svg" height="20" width="20"/>
+                    <img class="folder-hover" ngSrc="./assets/folder.svg" height="20" width="20"/>
+                </span>
+            </div>
+        </span>
+        {{item.Label}}
     </div>
   </cdk-virtual-scroll-viewport>
 </div>
