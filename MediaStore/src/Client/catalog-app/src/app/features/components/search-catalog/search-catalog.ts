@@ -13,7 +13,6 @@ import {API_BASE_URL, Service} from '../../../openapi/openapi';
     ScrollingModule,
     MatIconModule,
     MatButtonModule
-
   ],
   providers: [Service],
   templateUrl: './search-catalog.html',
@@ -21,32 +20,24 @@ import {API_BASE_URL, Service} from '../../../openapi/openapi';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchCatalog implements  OnInit{
-  items = Array.from({length: 50000}).map((_, i) => `Item #${i}`);
 
-  data = signal< fileItem[]>([]);
+  data = signal<FileItem[]>([]);
 
   constructor(private httpClient: HttpClient, private openApi: Service) {
   }
 
   ngOnInit(): void {
-   // @ts-ignore
-
     this.openApi.open('c:\\temp').subscribe()
     this.httpClient.get('mb-catalog.json').subscribe(d =>
     {
-
-      console.log("data: ",d);
-      // @ts-ignore
-      this.data.set(d) ;
+      this.data.set(d as FileItem[]) ;
     });
-
-
   }
 
   searchQuery = signal<string>('');
+
   filteredIitems = computed(() => {
     const sq = this.searchQuery();
-   // return this.data().filter(x => x.Search.includes(sq));
     const inputs = sq.split(" ");
     return this.data().filter(x => {
       return this.matchAllInputs(x.Search, inputs);
@@ -73,7 +64,7 @@ export class SearchCatalog implements  OnInit{
   }
 }
 
-export interface fileItem {
+export interface FileItem {
   Label: string
   Search: string
   Path:string

@@ -3,14 +3,11 @@
   {{data | json}}
 </pre>
 <br/>
-
-<br/>
 -->
 
 <div class="main-container">
 
   <div class="header">
-   <!-- Items in filtered data: {{filteredIitems().length}} -->
       <input #searchQuery type="text"  class="search-input" placeholder="Search collection" spellcheck="false" (input)="onSearchUpdated(searchQuery.value)" />
   </div>
 
