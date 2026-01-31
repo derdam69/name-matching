@@ -80,9 +80,24 @@ export class SearchCatalog implements  OnInit{
     )
   }
 
-
   enqueueLocation(item: FileItem) {
     this.openApi.queue(item.Folder).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
+  }
+
+  playItem(item: FileItem) {
+    this.openApi.play(item.Path).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
+  }
+
+  enqueueItem(item: FileItem) {
+    this.openApi.queue(item.Path).subscribe(
         {
           error: e => {alert(e)}
         }

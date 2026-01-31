@@ -28,6 +28,14 @@
                     <img alt="enqueue location" class="icon-default" ngSrc="/assets/folder-plus-mono.svg" height="20" width="20"/>
                     <img alt="enqueue location" class="icon-hover" ngSrc="./assets/folder-plus.svg" height="20" width="20"/>
                 </span>
+                <span class="action-icon" title="Play item" (click)="playItem(item)">
+                    <img alt="play item" class="icon-default" ngSrc="/assets/play-mono.svg" height="20" width="20"/>
+                    <img alt="play item" class="icon-hover" ngSrc="./assets/play.svg" height="20" width="20"/>
+                </span>
+                <span class="action-icon" title="Enqueue item" (click)="enqueueItem(item)">
+                    <img alt="enqueue item" class="icon-default" ngSrc="/assets/enqueue-mono.svg" height="20" width="20"/>
+                    <img alt="enqueue item" class="icon-hover" ngSrc="./assets/enqueue.svg" height="20" width="20"/>
+                </span>
             </div>
         </span>
         {{item.Label}}
