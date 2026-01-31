@@ -39,9 +39,9 @@ export class SearchCatalog implements  OnInit{
 
   filteredIitems = computed(() => {
     const sq = this.searchQuery();
-    const inputs = sq.split(" ");
+    const tokens = sq.split(" ");
     return this.data().filter(x => {
-      return this.matchAllInputs(x.Search, inputs);
+      return this.matchAllTokens(x.Search, tokens);
     })
   });
 
@@ -53,22 +53,34 @@ export class SearchCatalog implements  OnInit{
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 
-  matchAllInputs (item: string, inputs: string[]) {
-    if (inputs.length === 1) {
-      return item.indexOf(inputs[0]) > -1;
+  matchAllTokens (item: string, tokens: string[]) {
+    if (tokens.length === 1) {
+      return item.indexOf(tokens[0]) > -1;
     }
-    let i = inputs.length;
-    while (item.indexOf(inputs[i-1]) > -1) {
+    let i = tokens.length;
+    while (item.indexOf(tokens[i-1]) > -1) {
       i--;
     }
     return i === 0;
   }
 
-  openFolder(item: FileItem) {
-
-    this.openApi.open(item.Path).subscribe((openApi) => {},
-            e => {alert(e)})
+  openLocation(item: FileItem) {
+    this.openApi.open(item.Path).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
   }
+
+  playLocation(item: FileItem) {
+    this.openApi.play(item.Path).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
+  }
+
+
 }
 
 export interface FileItem {
