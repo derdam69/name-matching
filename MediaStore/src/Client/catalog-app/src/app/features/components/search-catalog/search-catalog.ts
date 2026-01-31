@@ -65,7 +65,7 @@ export class SearchCatalog implements  OnInit{
   }
 
   openLocation(item: FileItem) {
-    this.openApi.open(item.Path).subscribe(
+    this.openApi.open(item.Folder).subscribe(
         {
           error: e => {alert(e)}
         }
@@ -73,7 +73,7 @@ export class SearchCatalog implements  OnInit{
   }
 
   playLocation(item: FileItem) {
-    this.openApi.play(item.Path).subscribe(
+    this.openApi.play(item.Folder).subscribe(
         {
           error: e => {alert(e)}
         }

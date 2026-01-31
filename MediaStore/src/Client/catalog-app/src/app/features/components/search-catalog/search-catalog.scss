@@ -81,7 +81,11 @@ input {
 }
 
 .example-item:hover {
-  _background-color: darkslategrey;
+  background-color: var(--color-hover);
+}
+
+.row-detail {
+  cursor: default;
 }
 
 
