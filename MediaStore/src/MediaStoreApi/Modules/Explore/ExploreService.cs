@@ -31,11 +31,6 @@ public class ExploreService: IExploreService {
     {
         var files = Directory.GetFiles(path, pattern,
             new EnumerationOptions() { RecurseSubdirectories = true, AttributesToSkip = FileAttributes.System });
-
-        var output = files.Take(30000).Select(f => new { path = f });
-
-        var json = System.Text.Json.JsonSerializer.Serialize(output);
-        System.IO.File.WriteAllText(@"c:\temp\files.json", json);
         return files;
     }
 }

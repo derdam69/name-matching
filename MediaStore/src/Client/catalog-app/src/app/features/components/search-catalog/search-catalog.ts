@@ -3,53 +3,45 @@ import {ChangeDetectionStrategy, Component, computed, OnInit, signal} from '@ang
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { HttpClient } from '@angular/common/http';
-import {JsonPipe} from '@angular/common';
-import {API_BASE_URL, Service} from '../../../openapi/openapi';
+import {HttpClient } from '@angular/common/http';
+import {NgOptimizedImage} from '@angular/common';
+import {Service} from '../../../openapi/openapi';
 
 @Component({
   selector: 'app-search-catalog',
-  imports: [
-    ScrollingModule,
-    MatIconModule,
-    MatButtonModule
-
-  ],
+    imports: [
+        ScrollingModule,
+        MatIconModule,
+        MatButtonModule,
+        NgOptimizedImage
+    ],
   providers: [Service],
   templateUrl: './search-catalog.html',
   styleUrl: './search-catalog.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchCatalog implements  OnInit{
-  items = Array.from({length: 50000}).map((_, i) => `Item #${i}`);
 
-  data = signal< fileItem[]>([]);
+  data = signal<FileItem[]>([]);
 
   constructor(private httpClient: HttpClient, private openApi: Service) {
   }
 
   ngOnInit(): void {
-   // @ts-ignore
-
-    this.openApi.open('c:\\temp').subscribe()
+   // this.openApi.open('c:\\temp').subscribe()
     this.httpClient.get('mb-catalog.json').subscribe(d =>
     {
-
-      console.log("data: ",d);
-      // @ts-ignore
-      this.data.set(d) ;
+      this.data.set(d as FileItem[]) ;
     });
-
-
   }
 
   searchQuery = signal<string>('');
+
   filteredIitems = computed(() => {
     const sq = this.searchQuery();
-   // return this.data().filter(x => x.Search.includes(sq));
-    const inputs = sq.split(" ");
+    const tokens = sq.split(" ");
     return this.data().filter(x => {
-      return this.matchAllInputs(x.Search, inputs);
+      return this.matchAllTokens(x.Search, tokens);
     })
   });
 
@@ -61,19 +53,59 @@ export class SearchCatalog implements  OnInit{
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 
-  matchAllInputs (item: string, inputs: string[]) {
-    if (inputs.length === 1) {
-      return item.indexOf(inputs[0]) > -1;
+  matchAllTokens (item: string, tokens: string[]) {
+    if (tokens.length === 1) {
+      return item.indexOf(tokens[0]) > -1;
     }
-    let i = inputs.length;
-    while (item.indexOf(inputs[i-1]) > -1) {
+    let i = tokens.length;
+    while (item.indexOf(tokens[i-1]) > -1) {
       i--;
     }
     return i === 0;
   }
+
+  openLocation(item: FileItem) {
+    this.openApi.open(item.Folder).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
+  }
+
+  playLocation(item: FileItem) {
+    this.openApi.play(item.Folder).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
+  }
+
+  enqueueLocation(item: FileItem) {
+    this.openApi.queue(item.Folder).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
+  }
+
+  playItem(item: FileItem) {
+    this.openApi.play(item.Path).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
+  }
+
+  enqueueItem(item: FileItem) {
+    this.openApi.queue(item.Path).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
+  }
 }
 
-export interface fileItem {
+export interface FileItem {
   Label: string
   Search: string
   Path:string

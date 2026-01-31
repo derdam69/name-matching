@@ -3,20 +3,42 @@
   {{data | json}}
 </pre>
 <br/>
-
-<br/>
 -->
 
 <div class="main-container">
 
   <div class="header">
-   <!-- Items in filtered data: {{filteredIitems().length}} -->
       <input #searchQuery type="text"  class="search-input" placeholder="Search collection" spellcheck="false" (input)="onSearchUpdated(searchQuery.value)" />
   </div>
 
   <cdk-virtual-scroll-viewport id="scroll-viewport" class="sc"  itemSize="25"   minBufferPx="2000" maxBufferPx="4000">
-    <div *cdkVirtualFor="let item of filteredIitems()" class="example-item">
-      {{item.Label}}
+    <div *cdkVirtualFor="let item of filteredIitems()" class="example-item list-item">
+       <!-- {{item.Label}} -->
+        <span class="toolbar-container">
+            <div class="tools">
+                <span class="action-icon" title="Open location" (click)="openLocation(item)">
+                    <img alt="open location" class="icon-default" ngSrc="/assets/folder-mono.svg" height="20" width="20"/>
+                    <img alt="open location" class="icon-hover" ngSrc="./assets/folder.svg" height="20" width="20"/>
+                </span>
+                <span class="action-icon" title="Play location" (click)="playLocation(item)">
+                    <img alt="play location" class="icon-default" ngSrc="/assets/folder-play-mono.svg" height="20" width="20"/>
+                    <img alt="play location" class="icon-hover" ngSrc="./assets/folder-play.svg" height="20" width="20"/>
+                </span>
+                <span class="action-icon" title="Enqueue location" (click)="enqueueLocation(item)">
+                    <img alt="enqueue location" class="icon-default" ngSrc="/assets/folder-plus-mono.svg" height="20" width="20"/>
+                    <img alt="enqueue location" class="icon-hover" ngSrc="./assets/folder-plus.svg" height="20" width="20"/>
+                </span>
+                <span class="action-icon" title="Play item" (click)="playItem(item)">
+                    <img alt="play item" class="icon-default" ngSrc="/assets/play-mono.svg" height="20" width="20"/>
+                    <img alt="play item" class="icon-hover" ngSrc="./assets/play.svg" height="20" width="20"/>
+                </span>
+                <span class="action-icon action-enqueue-item" title="Enqueue item" (click)="enqueueItem(item)">
+                    <img alt="enqueue item" class="icon-default" ngSrc="/assets/enqueue-mono.svg" height="20" width="20"/>
+                    <img alt="enqueue item" class="icon-hover" ngSrc="./assets/enqueue.svg" height="20" width="20"/>
+                </span>
+            </div>
+        </span>
+        <span class="row-detail">{{item.Label}}</span>
     </div>
   </cdk-virtual-scroll-viewport>
 </div>

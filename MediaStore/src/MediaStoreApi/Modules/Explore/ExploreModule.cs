@@ -14,8 +14,10 @@ public static class ExploreModule
     {
         var group = endpoints.MapGroup("/api/explorer");
         group.MapPost("/open/{path}", PostOpen.Handle);
-       // group.MapGet("/files/{path}/{matchPattern}", GetFiles.Handle);
-       // group.MapGet("/test", () => "OK");
+        group.MapPost("/play/{path}", PostPlay.Handle);
+        group.MapPost("/winamp/queue/{path}", PostWinampQueue.Handle);
+        // group.MapGet("/files/{path}/{matchPattern}", GetFiles.Handle);
+        // group.MapGet("/test", () => "OK");
         return group;
     }
 }
