@@ -81,6 +81,13 @@ export class SearchCatalog implements  OnInit{
   }
 
 
+  enqueueLocation(item: FileItem) {
+    this.openApi.queue(item.Folder).subscribe(
+        {
+          error: e => {alert(e)}
+        }
+    )
+  }
 }
 
 export interface FileItem {
