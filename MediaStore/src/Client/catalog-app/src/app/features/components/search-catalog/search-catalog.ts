@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {HttpClient } from '@angular/common/http';
 import {NgOptimizedImage} from '@angular/common';
 import {Service} from '../../../openapi/openapi';
+import {MatRippleModule, RippleAnimationConfig} from '@angular/material/core';
 
 @Component({
   selector: 'app-search-catalog',
@@ -13,7 +14,8 @@ import {Service} from '../../../openapi/openapi';
         ScrollingModule,
         MatIconModule,
         MatButtonModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        MatRippleModule,
     ],
   providers: [Service],
   templateUrl: './search-catalog.html',
@@ -34,6 +36,12 @@ export class SearchCatalog implements  OnInit{
       this.data.set(d as FileItem[]) ;
     });
   }
+
+  isAlertMode = signal(true);
+  rippleConfig = computed<RippleAnimationConfig>(() => ({
+    enterDuration: this.isAlertMode() ? 100 : 800,
+    exitDuration: this.isAlertMode() ? 150 : 700,
+  }));
 
   searchQuery = signal<string>('');
 
