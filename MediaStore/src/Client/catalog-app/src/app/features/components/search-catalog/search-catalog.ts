@@ -7,6 +7,8 @@ import {HttpClient } from '@angular/common/http';
 import {NgOptimizedImage} from '@angular/common';
 import {Service} from '../../../openapi/openapi';
 import {MatRippleModule, RippleAnimationConfig} from '@angular/material/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { debounceTime, switchMap, of, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-search-catalog',
@@ -44,6 +46,17 @@ export class SearchCatalog implements  OnInit{
   }));
 
   searchQuery = signal<string>('');
+
+  results = toSignal(
+    toObservable(this.searchQuery).pipe(
+      debounceTime(300), // Wait for 300ms pause
+      switchMap(term => {
+        if (!term) return of([]); // Skip API if empty
+        return this.openApi.request(term).pipe(
+          catchError(() => of([])) // Handle errors
+        );
+      })))
+
 
   filteredIitems = computed(() => {
     const sq = this.searchQuery();

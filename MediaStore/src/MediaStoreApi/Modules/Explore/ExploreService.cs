@@ -41,4 +41,9 @@ public class ExploreService: IExploreService {
             new EnumerationOptions() { RecurseSubdirectories = true, AttributesToSkip = FileAttributes.System });
         return files;
     }
+
+    public void AddSearchRequest(string query)
+    {
+       _logger.LogInformation($"Add search request '{query}'");
+    }
 }
