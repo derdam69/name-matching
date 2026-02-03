@@ -49,7 +49,7 @@ export class SearchCatalog implements  OnInit{
 
   results = toSignal(
     toObservable(this.searchQuery).pipe(
-      debounceTime(300), // Wait for 300ms pause
+      debounceTime(1000), // Wait for 500ms pause
       switchMap(term => {
         if (!term) return of([]); // Skip API if empty
         return this.openApi.request(term).pipe(

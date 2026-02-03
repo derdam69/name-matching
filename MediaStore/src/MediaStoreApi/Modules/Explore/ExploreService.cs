@@ -1,3 +1,4 @@
+
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.Json.Serialization;
@@ -43,7 +44,10 @@ public class ExploreService: IExploreService {
     }
 
     public void AddSearchRequest(string query)
-    {
-       _logger.LogInformation($"Add search request '{query}'");
+    { 
+        var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/MediaStore/";
+        _logger.LogInformation(path);
+        System.IO.File.AppendAllText(path+"search-requests.txt", $"{query}\n");
+        _logger.LogInformation($"Add search request '{query}'");
     }
 }
