@@ -16,6 +16,7 @@ public static class ExploreModule
         group.MapPost("/open/{path}", PostOpen.Handle);
         group.MapPost("/play/{path}", PostPlay.Handle);
         group.MapPost("/winamp/queue/{path}", PostWinampQueue.Handle);
+                group.MapPost("/search/request", PostSearchRequest.Handle);
         // group.MapGet("/files/{path}/{matchPattern}", GetFiles.Handle);
         // group.MapGet("/test", () => "OK");
         return group;

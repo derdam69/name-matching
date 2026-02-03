@@ -5,13 +5,21 @@ using System.Text.Json.Serialization;
 namespace MediaStoreApi.Modules.Explore;
 
 public class ExploreService: IExploreService {
+    private ILogger<ExploreService> _logger;
 
     // Imports the FindWindow function from user32.dll
     [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
     static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
+    public ExploreService(ILogger<ExploreService> logger)
+    {
+        _logger = logger;
+    }
+
     public string Open(string path) {
         // Process.Start("explorer.exe", path);
+        _logger.LogInformation($"Open {path}");
+        
         var process = new Process();
 
         var startInfo = new ProcessStartInfo();
